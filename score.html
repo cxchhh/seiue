@@ -6287,7 +6287,7 @@
               <div data-v-e067b1ae="" class="echarts" _echarts_instance_="ec_1576204647552"
                 style="width: 100%; height: 200px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
                 <div
-                  style="position: relative; overflow: hidden; width: 398px; height: 200px; padding: 0px; margin: 0px; border-width: 0px;">
+                  style="position: relative; overflow: hidden; width: 1194px; height: 600px; padding: 0px; margin: 0px; border-width: 0px;">
                   <canvas id="canvas" data-zr-dom-id="zr_0" width="1194" height="600"
                     style="position: absolute; left: 0px; top: 0px; width: 398px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
                 </div>
@@ -6419,6 +6419,8 @@
   <script>
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
+    var cw=1110;
+    canvas.style.width=document.body.clientWidth+"px";
     var testname = $.query.get("testname");
     var myscore = $.query.get("myscore");
     var tot = $.query.get("tot");
@@ -6464,7 +6466,7 @@
     var tc = 0;
     var ex = 35;
     var dely = (505 - 75) / vnum;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2;
     for (var i = vnum; i >= 0; i--) {
       if (tc < 10) ex = 52;
       else ex = 32;
@@ -6472,7 +6474,8 @@
       tc += dy;
       ctx.beginPath();
       ctx.moveTo(100, 90 + i * dely);
-      ctx.lineTo(1120, 90 + i * dely);
+      ctx.lineTo(cw, 90 + i * dely);
+      console.log(cw);
       ctx.stroke();
     }
 
