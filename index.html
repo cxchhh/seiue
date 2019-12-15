@@ -222,6 +222,7 @@
                     var item = form[key];
                     url += "&" + key + "=" + item;
                 }
+                localStorage.setItem("inputs", JSON.stringify(form));
                 window.location.href = url;
             }
         },
@@ -246,6 +247,10 @@
         if (getCookie("Agreement") == "true") {
             obj.read = true;
             obj.$message("欢迎回来");
+        }
+        console.log(localStorage.getItem('inputs'));
+        if (localStorage.getItem('inputs') != null) {
+            obj.form = JSON.parse(localStorage.getItem('inputs'));
         }
     }
 </script>
