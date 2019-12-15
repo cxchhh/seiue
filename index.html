@@ -1,41 +1,253 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>希悦模拟器</title>
-        <meta charset="utf-8" />
-        <script src="js/jquery-3.4.1.js"></script>
-        <script src="js/jquery.params.js"></script>
-    </head>
-    <body>
-        <div>
-            <h1>仅供娱乐，请勿乱搞</h1>
-        </div>
-        <hr />
-        <form method=get action="score.html">
-            <input type="text" name="testname" placeholder="名称"/> <br />
-            <input type="text" name="myscore" placeholder="我的成绩"/> <br />
-            <input type="text" name="tot" placeholder="总分"/> <br />
-            <input type="text" name="conv" placeholder="折算总分"/> <br />
-            <input type="text" name="rank" placeholder="我的排名"/> <br />
-            <input type="text" name="totrank" placeholder="总人数"/> <br />
-            <input type="text" name="first" placeholder="第一名得分"/> <br />
-            <input type="text" name="prev" placeholder="前一名得分"/> <br />
-            <input type="text" name="nxt" placeholder="后一名"/> <br />
-            <input type="text" name="avr" placeholder="平均分"/> <br />
-            <input type="text" name="std" placeholder="标准差"/> <br />
-            <input type="text" name="date" placeholder="年-月-日"/> <br />
-            <input type="text" name="d1" placeholder="第一级人数"/> <br />
-            <input type="text" name="d2" placeholder="第二级人数"/> <br />
-            <input type="text" name="d3" placeholder="第三级人数"/> <br />
-            <input type="text" name="d4" placeholder="第四级人数"/> <br />
-            <input type="text" name="d5" placeholder="第五级人数"/> <br />
-            <input type="text" name="dy" placeholder="y轴单位长度"/> <br />
-            <input type="text" name="vnum" placeholder="纵坐标个数"/> <br />
-            <input type="submit" style="width:200px;height:100px;font-size:40px;" value="一键生成" />
 
-        </form>
-        <scirpt>
-            
-        </scirpt>
-    </body>
+<head>
+    <title>希悦模拟器</title>
+    <meta charset="utf-8" />
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.params.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./css/mainpage.css">
+</head>
+
+<body onload="Onload()">
+
+    <div id="app">
+        <img v-if="!read" src="https://cdn.stocksnap.io/img-thumbs/960w/HJBZ5IPCYF.jpg" class="bkg">
+        <div v-if="!True" class="musk"></div>
+        <div v-if="read" class="main-content">
+            <!-- <div>
+                <h1>仅供娱乐，请勿乱搞</h1>
+            </div>
+            <hr />
+            <form method=get action="score.html">
+                <input type="text" name="testname" placeholder="名称" /> <br />
+                <input type="text" name="myscore" placeholder="我的成绩" /> <br />
+                <input type="text" name="tot" placeholder="总分" /> <br />
+                <input type="text" name="conv" placeholder="折算总分" /> <br />
+                <input type="text" name="rank" placeholder="我的排名" /> <br />
+                <input type="text" name="totrank" placeholder="总人数" /> <br />
+                <input type="text" name="first" placeholder="第一名得分" /> <br />
+                <input type="text" name="prev" placeholder="前一名得分" /> <br />
+                <input type="text" name="nxt" placeholder="后一名" /> <br />
+                <input type="text" name="avr" placeholder="平均分" /> <br />
+                <input type="text" name="std" placeholder="标准差" /> <br />
+                <input type="text" name="date" placeholder="年-月-日" /> <br />
+                <input type="text" name="d1" placeholder="第一级人数" /> <br />
+                <input type="text" name="d2" placeholder="第二级人数" /> <br />
+                <input type="text" name="d3" placeholder="第三级人数" /> <br />
+                <input type="text" name="d4" placeholder="第四级人数" /> <br />
+                <input type="text" name="d5" placeholder="第五级人数" /> <br />
+                <input type="text" name="dy" placeholder="y轴单位长度" /> <br />
+                <input type="text" name="vnum" placeholder="纵坐标个数" /> <br />
+                <input type="submit" style="width:200px;height:100px;font-size:40px;" value="一键生成" />
+            </form> -->
+            <el-container>
+                <el-header id="header">
+                    Seiue simulator
+                </el-header>
+                <el-main id="main-area">
+                    <el-form :model="form" label-width="90px">
+                        <el-form-item label="名称">
+                            <el-input v-model="form.testname" placeholder="该过评项名称是什么"></el-input>
+                        </el-form-item>
+                        <el-form-item label="我的成绩">
+                            <el-input-number v-model="form.myscore" :precision="1" :step="1"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="总分">
+                            <el-input-number v-model="form.tot"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="折算总分">
+                            <el-input-number v-model="form.conv"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="我的排名">
+                            <el-input-number v-model="form.rank"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="总人数">
+                            <el-input-number v-model="form.totrank"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="第一名得分">
+                            <el-input-number v-model="form.first"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="前一名得分">
+                            <el-input-number v-model="form.prev"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="后一名得分">
+                            <el-input-number v-model="form.nxt"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="纵坐标个数">
+                            <el-input-number v-model="form.vnum"></el-input-number>
+                        </el-form-item>
+                    </el-form>
+                    <el-form :model="form" id="form2" label-width="95px">
+                        <el-form-item label="平均分">
+                            <el-input-number v-model="form.avr"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="标准差">
+                            <el-input-number v-model="form.std"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="日期">
+                            <el-date-picker value-format="yyyy-M-d" v-model="form.date" type="date" placeholder="选择日期">
+                            </el-date-picker>
+                        </el-form-item>
+                        <el-form-item label="第一级人数">
+                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d1" show-input></el-slider></div></template>
+                        </el-form-item>
+                        <el-form-item label="第二级人数">
+                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d2" show-input></el-slider></div></template>
+                        </el-form-item>
+                        <el-form-item label="第三级人数">
+                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d3" show-input></el-slider></div></template>
+                        </el-form-item>
+                        <el-form-item label="第四级人数">
+                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d4" show-input></el-slider></div></template>
+                        </el-form-item>
+                        <el-form-item label="第五级人数">
+                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d5" show-input></el-slider></div></template>
+                        </el-form-item>
+                        <el-form-item label="Y轴单位长度">
+                            <template>
+                                <div class="block">
+                                    <el-slider change=""v-model="form.dy" show-input></el-slider>
+                                </div>
+                            </template>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="onSubmit">立即生成</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-main>
+                <el-footer id="footer-bar">
+                    <el-row>
+                        <!-- <el-col :span="8">&nbsp;&nbsp;希悦模拟器</el-col> -->
+                        <el-col :offset="16" :span="8"><img src="https://img.shields.io/badge/github-steven12138-blue.svg"> <img src="https://img.shields.io/badge/github-cxchhh-blue.svg" alt=""></el-col>
+                    </el-row>
+                </el-footer>
+            </el-container>
+        </div>
+        <div v-else class="document">
+            <div class="doc">
+                <h1 class="title">希悦模拟器免责声明</h1>
+                <p> <strong>1、</strong> 一切访问本网站呢并正常使用此网站功能的用户，均被视为已经仔细阅读本条款并表示完全同意。凡以任何方式使用本网站者，均被视为愿接受本网站相关声明和用户服务协议的约束。</p>
+                <p> <strong>2、</strong> 用户使用本网站发表的言论以及转载的内容不代表本网站的任何意见与观点</p>
+                <p> <strong>3、</strong> 此网站由用户转载的信息，皆有本网站的使用者提供。其真实性、准确性和合法性由信息发布人负责。本网站不做任何担保并不承担任何法律责任</p>
+                <p> <strong>4、</strong> 用户明确并同意使用本网站所提供的服务产生的误解以及风险由其本人承担；因本网站的服务所产生的一切后果也有其本人承担，本网站对此不承担任何责任</p>
+                <p><strong>5、</strong> 本声明为涉及的问题参见国家法律，当本声明与国家法律产生冲突时，以国家相关法律法规为准</p>
+                <p><strong>6、</strong>本声明的修改权、更新权和最终解释权均属本网站所有</p>
+            </div>
+            <div class="chkbox">
+                <template>
+                    <el-checkbox border size="medium" v-model="read_chked" class="chkbx">我已认真阅读并且同意上述免责声明</el-checkbox>
+                </template>
+                <el-button @click="ctn" class="cfbtn" type="primary">继续</el-button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var obj = new Vue({
+        el: "#app",
+        data: function() {
+            return {
+                read: false,
+                True: true,
+                read_chked: false,
+                form: {
+                    testname: '',
+                    myscore: 0,
+                    tot: 0,
+                    conv: 0,
+                    rank: 0,
+                    totrank: 0,
+                    first: 0,
+                    prev: 0,
+                    nxt: 0,
+                    avr: 0,
+                    std: 0,
+                    date: '',
+                    d1: 0,
+                    d2: 0,
+                    d3: 0,
+                    d4: 0,
+                    d5: 0,
+                    dy: 0,
+                    vnum: 0
+                }
+            }
+        },
+        methods: {
+            setCookie: function(cname, cvalue, exdays) {    
+                var d = new Date();    
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));    
+                var expires = "expires=" + d.toUTCString();    
+                console.info(cname + "=" + cvalue + "; " + expires);    
+                document.cookie = cname + "=" + cvalue + "; " + expires;    
+                console.info(document.cookie);   
+            },
+            ctn: function() {
+                if (!this.read_chked) {
+                    this.$message({
+                        type: "error",
+                        message: "请认真阅读此条款并同意后方可继续使用本网站服务",
+                        duration: "1000"
+                    })
+                } else {
+                    this.$message({
+                        type: "success",
+                        message: "感谢您使用此网站",
+                        duration: "1000"
+                    });
+                    this.setCookie("Agreement", true, 1);
+                    var self = this;
+                    setTimeout(function() {
+                        self.read = true;
+                    }, 1000);
+                }
+            },
+            onSubmit: function() {
+                var form = this.form;
+                if (form.testname == "" || form.date == "") {
+                    this.$message({
+                        type: "error",
+                        message: "不可为空",
+                        duration: 900
+                    });
+                    return;
+                }
+                url = "score.html?testname=" + form.testname;
+                for (var key in form) {　　
+                    var item = form[key];
+                    url += "&" + key + "=" + item;
+                }
+                window.location.href = url;
+            }
+        },
+    });
+
+    function getCookie(cname) {    
+        var name = cname + "=";    
+        var ca = document.cookie.split(';');    
+        // console.log("获取cookie,现在循环");
+        for (var i = 0; i < ca.length; i++) {     
+            var c = ca[i];     
+            // console.log(c);
+            while (c.charAt(0) == ' ') c = c.substring(1);     
+            if (c.indexOf(name) != -1) {      
+                return c.substring(name.length, c.length);     
+            }    
+        }    
+        return "";   
+    }
+
+    function Onload() {
+        if (getCookie("Agreement") == "true") {
+            obj.read = true;
+            obj.$message("欢迎回来");
+        }
+    }
+</script>
+
 </html>

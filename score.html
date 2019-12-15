@@ -3,1413 +3,1397 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src="js/jquery-3.4.1.js"></script>
-  <script src="js/jquery.params.js"></script>
-  <link href="iconfont-embedded.css" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    .tippy-touch {
-      cursor: pointer !important
-    }
-
-    .tippy-notransition {
-      transition: none !important
-    }
-
-    .tippy-popper {
-      max-width: 350px;
-      -webkit-perspective: 700px;
-      perspective: 700px;
-      z-index: 9999;
-      outline: 0;
-      transition-timing-function: cubic-bezier(.165, .84, .44, 1);
-      pointer-events: none;
-      line-height: 1.4
-    }
-
-    .tippy-popper[data-html] {
-      max-width: 96%;
-      max-width: calc(100% - 20px)
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-backdrop {
-      border-radius: 40% 40% 0 0
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-roundarrow {
-      bottom: -8px;
-      -webkit-transform-origin: 50% 0;
-      transform-origin: 50% 0
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-roundarrow svg {
-      position: absolute;
-      left: 0;
-      -webkit-transform: rotate(180deg);
-      transform: rotate(180deg)
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-arrow {
-      border-top: 7px solid #333;
-      border-right: 7px solid transparent;
-      border-left: 7px solid transparent;
-      bottom: -7px;
-      margin: 0 6px;
-      -webkit-transform-origin: 50% 0;
-      transform-origin: 50% 0
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-backdrop {
-      -webkit-transform-origin: 0 90%;
-      transform-origin: 0 90%
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-backdrop[data-state=visible] {
-      -webkit-transform: scale(6) translate(-50%, 25%);
-      transform: scale(6) translate(-50%, 25%);
-      opacity: 1
-    }
-
-    .tippy-popper[x-placement^=top] .tippy-backdrop[data-state=hidden] {
-      -webkit-transform: scale(1) translate(-50%, 25%);
-      transform: scale(1) translate(-50%, 25%);
-      opacity: 0
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(-10px);
-      transform: translateY(-10px)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(-20px);
-      transform: translateY(-20px)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=perspective] {
-      -webkit-transform-origin: bottom;
-      transform-origin: bottom
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=perspective][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(-10px) rotateX(0);
-      transform: translateY(-10px) rotateX(0)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=perspective][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0) rotateX(90deg);
-      transform: translateY(0) rotateX(90deg)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=fade][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(-10px);
-      transform: translateY(-10px)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=fade][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(-10px);
-      transform: translateY(-10px)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(-10px);
-      transform: translateY(-10px)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0);
-      transform: translateY(0)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=scale][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(-10px) scale(1);
-      transform: translateY(-10px) scale(1)
-    }
-
-    .tippy-popper[x-placement^=top] [data-animation=scale][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0) scale(0);
-      transform: translateY(0) scale(0)
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-backdrop {
-      border-radius: 0 0 30% 30%
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-roundarrow {
-      top: -8px;
-      -webkit-transform-origin: 50% 100%;
-      transform-origin: 50% 100%
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-roundarrow svg {
-      position: absolute;
-      left: 0;
-      -webkit-transform: rotate(0);
-      transform: rotate(0)
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-arrow {
-      border-bottom: 7px solid #333;
-      border-right: 7px solid transparent;
-      border-left: 7px solid transparent;
-      top: -7px;
-      margin: 0 6px;
-      -webkit-transform-origin: 50% 100%;
-      transform-origin: 50% 100%
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-backdrop {
-      -webkit-transform-origin: 0 -90%;
-      transform-origin: 0 -90%
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=visible] {
-      -webkit-transform: scale(6) translate(-50%, -125%);
-      transform: scale(6) translate(-50%, -125%);
-      opacity: 1
-    }
-
-    .tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=hidden] {
-      -webkit-transform: scale(1) translate(-50%, -125%);
-      transform: scale(1) translate(-50%, -125%);
-      opacity: 0
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(10px);
-      transform: translateY(10px)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(20px);
-      transform: translateY(20px)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=perspective] {
-      -webkit-transform-origin: top;
-      transform-origin: top
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(10px) rotateX(0);
-      transform: translateY(10px) rotateX(0)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0) rotateX(-90deg);
-      transform: translateY(0) rotateX(-90deg)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(10px);
-      transform: translateY(10px)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(10px);
-      transform: translateY(10px)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(10px);
-      transform: translateY(10px)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0);
-      transform: translateY(0)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateY(10px) scale(1);
-      transform: translateY(10px) scale(1)
-    }
-
-    .tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateY(0) scale(0);
-      transform: translateY(0) scale(0)
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-backdrop {
-      border-radius: 50% 0 0 50%
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-roundarrow {
-      right: -16px;
-      -webkit-transform-origin: 33.33333333% 50%;
-      transform-origin: 33.33333333% 50%
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-roundarrow svg {
-      position: absolute;
-      left: 0;
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg)
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-arrow {
-      border-left: 7px solid #333;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      right: -7px;
-      margin: 3px 0;
-      -webkit-transform-origin: 0 50%;
-      transform-origin: 0 50%
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-backdrop {
-      -webkit-transform-origin: 100% 0;
-      transform-origin: 100% 0
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-backdrop[data-state=visible] {
-      -webkit-transform: scale(6) translate(40%, -50%);
-      transform: scale(6) translate(40%, -50%);
-      opacity: 1
-    }
-
-    .tippy-popper[x-placement^=left] .tippy-backdrop[data-state=hidden] {
-      -webkit-transform: scale(1.5) translate(40%, -50%);
-      transform: scale(1.5) translate(40%, -50%);
-      opacity: 0
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(-10px);
-      transform: translateX(-10px)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(-20px);
-      transform: translateX(-20px)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=perspective] {
-      -webkit-transform-origin: right;
-      transform-origin: right
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=perspective][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(-10px) rotateY(0);
-      transform: translateX(-10px) rotateY(0)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=perspective][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0) rotateY(-90deg);
-      transform: translateX(0) rotateY(-90deg)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=fade][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(-10px);
-      transform: translateX(-10px)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=fade][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(-10px);
-      transform: translateX(-10px)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(-10px);
-      transform: translateX(-10px)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0);
-      transform: translateX(0)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=scale][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(-10px) scale(1);
-      transform: translateX(-10px) scale(1)
-    }
-
-    .tippy-popper[x-placement^=left] [data-animation=scale][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0) scale(0);
-      transform: translateX(0) scale(0)
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-backdrop {
-      border-radius: 0 50% 50% 0
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-roundarrow {
-      left: -16px;
-      -webkit-transform-origin: 66.66666666% 50%;
-      transform-origin: 66.66666666% 50%
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-roundarrow svg {
-      position: absolute;
-      left: 0;
-      -webkit-transform: rotate(-90deg);
-      transform: rotate(-90deg)
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-arrow {
-      border-right: 7px solid #333;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      left: -7px;
-      margin: 3px 0;
-      -webkit-transform-origin: 100% 50%;
-      transform-origin: 100% 50%
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-backdrop {
-      -webkit-transform-origin: -100% 0;
-      transform-origin: -100% 0
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-backdrop[data-state=visible] {
-      -webkit-transform: scale(6) translate(-140%, -50%);
-      transform: scale(6) translate(-140%, -50%);
-      opacity: 1
-    }
-
-    .tippy-popper[x-placement^=right] .tippy-backdrop[data-state=hidden] {
-      -webkit-transform: scale(1.5) translate(-140%, -50%);
-      transform: scale(1.5) translate(-140%, -50%);
-      opacity: 0
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(10px);
-      transform: translateX(10px)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(20px);
-      transform: translateX(20px)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=perspective] {
-      -webkit-transform-origin: left;
-      transform-origin: left
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=perspective][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(10px) rotateY(0);
-      transform: translateX(10px) rotateY(0)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=perspective][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0) rotateY(90deg);
-      transform: translateX(0) rotateY(90deg)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=fade][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(10px);
-      transform: translateX(10px)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=fade][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(10px);
-      transform: translateX(10px)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(10px);
-      transform: translateX(10px)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0);
-      transform: translateX(0)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=scale][data-state=visible] {
-      opacity: 1;
-      -webkit-transform: translateX(10px) scale(1);
-      transform: translateX(10px) scale(1)
-    }
-
-    .tippy-popper[x-placement^=right] [data-animation=scale][data-state=hidden] {
-      opacity: 0;
-      -webkit-transform: translateX(0) scale(0);
-      transform: translateX(0) scale(0)
-    }
-
-    .tippy-tooltip {
-      position: relative;
-      color: #fff;
-      border-radius: 4px;
-      font-size: .9rem;
-      padding: .3rem .6rem;
-      text-align: center;
-      will-change: transform;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      background-color: #333
-    }
-
-    .tippy-tooltip[data-size=small] {
-      padding: .2rem .4rem;
-      font-size: .75rem
-    }
-
-    .tippy-tooltip[data-size=large] {
-      padding: .4rem .8rem;
-      font-size: 1rem
-    }
-
-    .tippy-tooltip[data-animatefill] {
-      overflow: hidden;
-      background-color: transparent
-    }
-
-    .tippy-tooltip[data-animatefill] .tippy-content {
-      transition: -webkit-clip-path cubic-bezier(.46, .1, .52, .98);
-      transition: clip-path cubic-bezier(.46, .1, .52, .98);
-      transition: clip-path cubic-bezier(.46, .1, .52, .98), -webkit-clip-path cubic-bezier(.46, .1, .52, .98)
-    }
-
-    .tippy-tooltip[data-interactive],
-    .tippy-tooltip[data-interactive] path {
-      pointer-events: auto
-    }
-
-    .tippy-tooltip[data-inertia][data-state=visible] {
-      transition-timing-function: cubic-bezier(.53, 2, .36, .85)
-    }
-
-    .tippy-tooltip[data-inertia][data-state=hidden] {
-      transition-timing-function: ease
-    }
-
-    .tippy-arrow,
-    .tippy-roundarrow {
-      position: absolute;
-      width: 0;
-      height: 0
-    }
-
-    .tippy-roundarrow {
-      width: 24px;
-      height: 8px;
-      fill: #333;
-      pointer-events: none
-    }
-
-    .tippy-backdrop {
-      position: absolute;
-      will-change: transform;
-      background-color: #333;
-      border-radius: 50%;
-      width: 26%;
-      left: 50%;
-      top: 50%;
-      z-index: -1;
-      transition: all cubic-bezier(.46, .1, .52, .98);
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden
-    }
-
-    .tippy-backdrop:after {
-      content: "";
-      float: left;
-      padding-top: 100%
-    }
-
-    body:not(.tippy-touch) .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
-      -webkit-clip-path: ellipse(100% 100% at 50% 50%);
-      clip-path: ellipse(100% 100% at 50% 50%)
-    }
-
-    body:not(.tippy-touch) .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
-      -webkit-clip-path: ellipse(5% 50% at 50% 50%);
-      clip-path: ellipse(5% 50% at 50% 50%)
-    }
-
-    body:not(.tippy-touch) .tippy-popper[x-placement=right] .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
-      -webkit-clip-path: ellipse(135% 100% at 0 50%);
-      clip-path: ellipse(135% 100% at 0 50%)
-    }
-
-    body:not(.tippy-touch) .tippy-popper[x-placement=right] .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
-      -webkit-clip-path: ellipse(40% 100% at 0 50%);
-      clip-path: ellipse(40% 100% at 0 50%)
-    }
-
-    body:not(.tippy-touch) .tippy-popper[x-placement=left] .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
-      -webkit-clip-path: ellipse(135% 100% at 100% 50%);
-      clip-path: ellipse(135% 100% at 100% 50%)
-    }
-
-    body:not(.tippy-touch) .tippy-popper[x-placement=left] .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
-      -webkit-clip-path: ellipse(40% 100% at 100% 50%);
-      clip-path: ellipse(40% 100% at 100% 50%)
-    }
-
-    @media (max-width:360px) {
-      .tippy-popper {
-        max-width: 96%;
-        max-width: calc(100% - 20px)
-      }
-    }
-  </style>
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="screen-orientation" content="portrait">
-  <meta name="x5-orientation" content="portrait">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="apple-touch-icon" sizes="57x57" href="https://bdfz.seiue.com/favicons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="https://bdfz.seiue.com/favicons/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="https://bdfz.seiue.com/favicons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="https://bdfz.seiue.com/favicons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://bdfz.seiue.com/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="https://bdfz.seiue.com/favicons/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://bdfz.seiue.com/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="https://bdfz.seiue.com/favicons/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://bdfz.seiue.com/favicons/favicon-16x16.png">
-  <link rel="manifest" href="https://bdfz.seiue.com/favicons/manifest.json">
-  <link rel="preconnect" href="https://platform.seiue.com/">
-  <link rel="preconnect" href="https://chalkng.seiue.com/">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <metaname="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <title>成绩项详情</title>
-    <style>
-      .seiue-loader-container {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        -webkit-transform: scale(1.0);
-        transform: scale(1.0);
-      }
-    </style>
-    <link href="https://bdfz.seiue.com/css/chunk-003005e6.ba617297.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0086d4e9.5d2eae20.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-02460656.7574b947.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-047eb03c.e40269d6.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-053b570c.c2195692.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-05f2d8ee.6d0a2b7d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0639d25f.2ca05f11.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-071bb57b.d4048357.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-0726cf8d.27f7b0ef.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0a15eaeb.1aa036dd.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0b1b6e1c.d2f3a341.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0c1d79ac.72e48249.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0c6de9c3.a68ed7ab.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-0ee2bf1a.7dfd8f38.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-12bfb56e.f3209633.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1418cbec.492d64c9.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1455951a.3f007bbd.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-149b0946.86203d06.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-1514fbc4.abe99e57.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1516b31e.7d49c9b7.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-15206da1.f3567427.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-153bcd2e.5a983f08.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1789d0be.55b71bf5.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-179bf918.9ede8fd3.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-186daeef.b1ff3bcf.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-188d8590.651c9b85.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1a591014.f04264b7.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1b9a339c.f48a804e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1cb3e6f3.0a79c225.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1cc1dbcb.f8425bf6.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1cdb90ff.457e711e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1cf93308.747fa8a4.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-1ee6eff0.5450cffa.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-20e39a80.3984bb13.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-21cb0ed6.57a951ba.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-21f31271.0233fb27.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-22f01b1b.a2568949.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-2395e43c.99c6fce3.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-257f0a81.f0bb1589.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-258b6f3a.1a00daa5.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-25f6f2ca.f2443cf4.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-2786ab98.fb419c33.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-2b5deba9.00efda3d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-2cf52d53.e3fa512f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3055c205.808e93f4.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-30618d74.77366234.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-306f3760.7c70d2bb.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3239632f.81997de9.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-32a3470e.9ef7d41d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-332f8568.88977dea.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3377a338.cd907dd9.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3429d3f0.dea06dcf.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-34dd22fe.98564573.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3693abbd.b184ca0c.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-36cba76a.6f9bf6f2.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-36d6eb60.f6ec2f43.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3776cd5e.808084b1.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-38498d94.ea716ed6.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3b665230.6a1f1517.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3b683bfe.3986be7f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3c91c0ee.fd9879bd.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-3d8c1359.386477ac.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-3ecc6367.7d98b182.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3f8bf1b9.40afbdf8.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-3fe36f9b.57a951ba.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-40c5525c.7a9907d0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-40d49a40.ebae6b35.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-411381ea.0b5bd23d.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-412b9b55.b3753599.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-435b0b0e.6de3b05e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-453dfa45.0b5e44b2.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-459d2de4.8973aa69.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-4c401eba.fdc86833.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4c649117.2b80b355.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4d140e44.66f07403.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4d42fae2.fa9f7054.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4dcc3346.79f0d828.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4dcd5ce2.113cfd38.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-4e68fcb2.a989628a.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5037eea8.eae8883e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-511fc762.6f7f1a83.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-51f1a2e7.86b56508.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-529f19f4.c2d10eb7.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-52db6f30.b0c82610.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5643da07.027dfe8d.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-569c03cd.bef60821.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5762ddad.15a6b172.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5a3645b0.514e7f8a.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5bfe26c2.22b1d549.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5cb5f3cc.4e3ea3bd.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5da5d0f0.25cb40c5.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-5e75aa75.9381d6c2.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-61770712.af5e3336.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-666a08ba.6dec44a0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-671dac60.505e651c.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6771274f.65ab970d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6848fa66.e74e34ff.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6ae51ed0.3be9cbb0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6ce66f2d.34e01cb0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6cf55c0c.d2a3698d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6d51a490.04ac3875.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-6ddf19e4.0b78ce68.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-74195e51.77950f66.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-74f0e96c.42454b12.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-7541b87e.23922363.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-77f09d5c.8973aa69.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-782b1869.2a997a86.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-78e30fec.027dfe8d.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-7f36017d.b098af91.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-808e024e.171134da.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-84ba384a.7f8d561c.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-86847a6e.f4289ad9.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-8725b64a.b794826f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-88e77166.a8dd2d47.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-8eefff4e.81997de9.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-9152bf34.f3567427.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-92836434.4426e591.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-92ed7d14.1cc8962f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-97c36cac.87e49f73.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-99a7a3d4.8bb2702e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-9cd9a6d8.f03b115b.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-a1893304.2e8bf406.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-a40a6da8.599918e1.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-a5c210a2.88a79b4c.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-a60fb6be.4acee9b0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-a7e1d94c.088ee993.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-aa3e38fa.e110d9b7.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-b5c8cd4a.e085ce98.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-b9a3d684.a16e9f67.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-baabb80a.027dfe8d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-bd259976.a490db2e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-bd8f5fd6.a0c0b1d0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-bdf9775c.d91cd65d.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-be534e52.72fd977f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-bf68164e.8afb4f9e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-c940b554.864f1ede.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-c95beb5c.3b2ff6c3.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-ca0fe92a.4aaaee32.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-cabe2b8c.ef71f1f0.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-cafc47f6.34af4a17.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-cfab5e68.835ef79a.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-d275a6da.ee165127.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-d397e248.605ccaa7.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-da03fbce.baea190f.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-db150faa.492c855b.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-dd0b01b4.85ccaca4.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-e1cece66.e2b1934e.css" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-e6d38cfe.d3765326.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-e70e9c48.31f29905.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-eec0217e.d29c5e88.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-efc40508.dc23376e.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-f596feb2.b6386210.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-f6710c06.5b887f8b.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-f6a326c8.75a20450.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-f9c0868e.a9b8ab90.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-fa282234.cc8bafc0.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-fb54a110.c284026c.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/css/chunk-fbb89460.bed562f7.css" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-003005e6.60292431.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0086d4e9.17362789.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-02460656.fbcc2775.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-047eb03c.b27b1139.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-053b570c.2068cc3c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-05f2d8ee.08a4b09a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0639d25f.ceb9cb78.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-071bb57b.fa4c0e9d.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-0726cf8d.ef2ac9c0.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0a15eaeb.8c9fa054.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0b1b6e1c.f441500a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0c1d79ac.097f4cda.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0c6de9c3.e8496c9f.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-0ee2bf1a.8467da93.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-11491882.edfaf7a1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-12bfb56e.a0e8fd50.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1418cbec.b64b62ed.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1455951a.b8d951b3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-149b0946.5dc30fce.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-1514fbc4.88af66df.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1516b31e.4ef41ed0.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-15206da1.af95aa57.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-153bcd2e.cc20dffa.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1789d0be.7ef309f4.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-179bf918.5f836a84.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-186daeef.bc5f174e.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-188d8590.23fb1ea7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1a591014.d3463345.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1b9a339c.325a095d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1cb3e6f3.278f1307.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1cc1dbcb.3adf6e80.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1cdb90ff.c1a76cb8.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1cf93308.599f3b7a.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-1eabedfe.a9bc7529.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-1ee6eff0.1809b623.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-1fe4a436.f3132777.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-20e39a80.7ccca44a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-21cb0ed6.1e544db3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-21f31271.1f516108.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-22f01b1b.8be8e845.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2395e43c.01cd34aa.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-257f0a81.89a0efe6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-258b6f3a.8bbafb28.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-25f6f2ca.8ba60b34.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2786ab98.7236ac7d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-29a224ea.9d4ce9eb.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-2b5deba9.4acadad8.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2cf52d53.aa799d7c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0a404d.5827f6ae.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0ab715.e809f7c8.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0b33ff.47cdc80a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0bfeb1.8416d8c0.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0c55ca.b05a08f7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0c8656.0ac7d06c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0cc806.e1c49617.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0cc9b6.006f2785.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0d0285.5d144e53.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d0d09d4.1446b974.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d208e84.7303bbf3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d20fe6e.258e7da2.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-2d2176a7.028f045b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d22230e.ec215f98.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d22231b.660165e3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-2d230acf.799f35c2.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3055c205.bcba0cec.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-30618d74.ade8717a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-306f3760.24e1bd21.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3239632f.f878fb33.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-32a3470e.fb81aeef.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-332f8568.ae1d92c1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3377a338.040c01f1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3429d3f0.63266121.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-34dd22fe.ca412067.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3693abbd.abad0330.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-36cba76a.e768ea80.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-36d6eb60.57b085d1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3776cd5e.95c81b73.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-38498d94.f869c955.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3aa81b7a.6857f366.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3b665230.62ac8f1e.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3b683bfe.b8560b7b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3c91c0ee.58902eb1.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-3d8c1359.8e4263db.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-3ecc6367.7f2c8484.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3f8bf1b9.bd88d0da.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-3fe36f9b.1cb62a3b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-40c5525c.0a6fd577.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-40d49a40.836a3e87.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-411381ea.621f8e2c.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-412b9b55.ed731cd6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-435b0b0e.97bd44a7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-453dfa45.61f53ff7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-459d2de4.3d0169fa.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-463b0fac.e2b39791.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-4c401eba.fa510528.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4c649117.7617687c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4d140e44.ae3270c7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4d42fae2.8e279610.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4dcc3346.b4614d74.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4dcd5ce2.1af0b167.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-4e68fcb2.32e2709c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5037eea8.498666d4.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-511fc762.66e1d132.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-51f1a2e7.28f485a5.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-529f19f4.d24213f1.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-52db6f30.8b863c1b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5643da07.1782ba0c.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-569c03cd.7da68977.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5762ddad.b4b31d50.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-59157aad.ac346f2a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5a3645b0.a2c608c1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5bfe26c2.5b9cd0a1.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5cb5f3cc.e08d90f3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5da5d0f0.b30b446f.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-5e75aa75.c6a81710.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-5feec84e.96faea24.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-60432ef8.d7a0848b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-61770712.a6e59a9d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-666a08ba.fd69a45d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-66982ea6.23817e43.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-671dac60.d380db0e.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6771274f.1eff4e3d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6848fa66.c55e8b34.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6ae51ed0.f51d8f1d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6ce66f2d.5c4e3459.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6cf55c0c.392823e7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6d51a490.88433da7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-6ddf19e4.46276428.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-70f1a602.35991c93.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-74195e51.600601e3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-74f0e96c.592c36e4.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-7541b87e.0f5c81ec.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-77496ec0.221a070e.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-77f09d5c.4c8b6387.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-78074934.e16bab55.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-782b1869.39756743.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-78e30fec.6ca2faf7.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-7f36017d.644d5978.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-808e024e.9847fd82.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-84ba384a.5dc08bb7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-86847a6e.5ae44ed8.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-8725b64a.fdb6d274.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-88e77166.b45adce7.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-8eefff4e.bd46113e.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-9152bf34.370fa8a3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-92836434.a0de1b0c.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-92ed7d14.4f82133a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-97c36cac.069c253c.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-99a7a3d4.761ba4f8.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-9cd9a6d8.14a76466.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-a1893304.64ff41a3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-a40a6da8.f8b6a3bf.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-a5c210a2.c266f53f.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-a60fb6be.3aa10cc3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-a7e1d94c.40e46cb2.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-aa3e38fa.2a90d050.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-b5c8cd4a.0b574bca.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-b9a3d684.41ce004b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-baabb80a.f6bc58f6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-bd259976.31e69d3d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-bd8f5fd6.e2135577.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-bdf9775c.fc6b760d.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-be534e52.baf9f0c0.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-bf68164e.88b463ea.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-c940b554.f112c168.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-c95beb5c.67856524.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-ca0fe92a.e2822ec3.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-cabe2b8c.2a6f400a.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-cafc47f6.5d3c018f.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-cfab5e68.1c81b1fb.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-d275a6da.82e30cf2.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-d397e248.7dd253f6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-da03fbce.777b9dd4.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-db150faa.abc19d5a.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-dd0b01b4.ad031e00.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-e1cece66.4cd81049.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-e6d38cfe.e9d80d12.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-e70e9c48.7c211eb6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-eec0217e.3605ef05.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-efc40508.b568d9d2.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-efe59a24.81d141bb.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-f596feb2.9ca10a99.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-f64a2c0a.10d3545b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-f6710c06.11eb6d51.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-f6a326c8.8c4ee58b.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-f9c0868e.61e7ae03.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-fa282234.33c2e4fa.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-fb54a110.e862d1f6.js" rel="prefetch">
-    <link href="https://bdfz.seiue.com/js/chunk-fbb89460.75e80b97.js" rel="prefetch">
-    <link href="./成绩项详情_files/chunk-common.51b66c34.css" rel="preload" as="style">
-    <link href="./成绩项详情_files/chunk-vendors.da2e68e8.css" rel="preload" as="style">
-    <link href="./成绩项详情_files/mobile.970ca800.css" rel="preload" as="style">
-    <link href="./成绩项详情_files/chunk-common.b82cd3fd.js" rel="preload" as="script">
-    <link href="./成绩项详情_files/chunk-vendors.6978b5df.js" rel="preload" as="script">
-    <link href="./成绩项详情_files/mobile.1a152cdb.js" rel="preload" as="script">
-    <link href="./成绩项详情_files/chunk-vendors.da2e68e8.css" rel="stylesheet">
-    <link href="./成绩项详情_files/chunk-common.51b66c34.css" rel="stylesheet">
-    <link href="./成绩项详情_files/mobile.970ca800.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-e6d38cfe.d3765326.css">
-    <script type="text/javascript" async="" src="./成绩项详情_files/vds.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-e6d38cfe.e9d80d12.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-59157aad.ac346f2a.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-3ecc6367.7d98b182.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-3ecc6367.7f2c8484.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-463b0fac.e2b39791.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-cafc47f6.34af4a17.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-cafc47f6.5d3c018f.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-412b9b55.b3753599.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-412b9b55.ed731cd6.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-52db6f30.b0c82610.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-52db6f30.8b863c1b.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-2d2176a7.028f045b.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-5feec84e.96faea24.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-99a7a3d4.8bb2702e.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-99a7a3d4.761ba4f8.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-047eb03c.e40269d6.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-047eb03c.b27b1139.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-4c401eba.fdc86833.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-4c401eba.fa510528.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-cfab5e68.835ef79a.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-cfab5e68.1c81b1fb.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.params.js"></script>
+    <link href="iconfont-embedded.css" rel="stylesheet" type="text/css">
     <style type="text/css">
-      .infinite-loading-container[data-v-46b21138] {
-        clear: both;
-        text-align: center
-      }
-
-      .infinite-loading-container[data-v-46b21138] [class^=loading-] {
-        display: inline-block;
-        margin: 5px 0;
-        width: 28px;
-        height: 28px;
-        font-size: 28px;
-        line-height: 28px;
-        border-radius: 50%
-      }
-
-      .btn-try-infinite[data-v-46b21138] {
-        margin-top: 5px;
-        padding: 5px 10px;
-        color: #999;
-        font-size: 14px;
-        line-height: 1;
-        background: transparent;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        outline: none;
-        cursor: pointer
-      }
-
-      .btn-try-infinite[data-v-46b21138]:not(:active):hover {
-        opacity: .8
-      }
+        .tippy-touch {
+            cursor: pointer !important
+        }
+        
+        .tippy-notransition {
+            transition: none !important
+        }
+        
+        .tippy-popper {
+            max-width: 350px;
+            -webkit-perspective: 700px;
+            perspective: 700px;
+            z-index: 9999;
+            outline: 0;
+            transition-timing-function: cubic-bezier(.165, .84, .44, 1);
+            pointer-events: none;
+            line-height: 1.4
+        }
+        
+        .tippy-popper[data-html] {
+            max-width: 96%;
+            max-width: calc(100% - 20px)
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-backdrop {
+            border-radius: 40% 40% 0 0
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-roundarrow {
+            bottom: -8px;
+            -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-roundarrow svg {
+            position: absolute;
+            left: 0;
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg)
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-arrow {
+            border-top: 7px solid #333;
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+            bottom: -7px;
+            margin: 0 6px;
+            -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-backdrop {
+            -webkit-transform-origin: 0 90%;
+            transform-origin: 0 90%
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-backdrop[data-state=visible] {
+            -webkit-transform: scale(6) translate(-50%, 25%);
+            transform: scale(6) translate(-50%, 25%);
+            opacity: 1
+        }
+        
+        .tippy-popper[x-placement^=top] .tippy-backdrop[data-state=hidden] {
+            -webkit-transform: scale(1) translate(-50%, 25%);
+            transform: scale(1) translate(-50%, 25%);
+            opacity: 0
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(-20px);
+            transform: translateY(-20px)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=perspective] {
+            -webkit-transform-origin: bottom;
+            transform-origin: bottom
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=perspective][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(-10px) rotateX(0);
+            transform: translateY(-10px) rotateX(0)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=perspective][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0) rotateX(90deg);
+            transform: translateY(0) rotateX(90deg)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=fade][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=fade][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0);
+            transform: translateY(0)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=scale][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(-10px) scale(1);
+            transform: translateY(-10px) scale(1)
+        }
+        
+        .tippy-popper[x-placement^=top] [data-animation=scale][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0) scale(0);
+            transform: translateY(0) scale(0)
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-backdrop {
+            border-radius: 0 0 30% 30%
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-roundarrow {
+            top: -8px;
+            -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-roundarrow svg {
+            position: absolute;
+            left: 0;
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-arrow {
+            border-bottom: 7px solid #333;
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+            top: -7px;
+            margin: 0 6px;
+            -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-backdrop {
+            -webkit-transform-origin: 0 -90%;
+            transform-origin: 0 -90%
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=visible] {
+            -webkit-transform: scale(6) translate(-50%, -125%);
+            transform: scale(6) translate(-50%, -125%);
+            opacity: 1
+        }
+        
+        .tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=hidden] {
+            -webkit-transform: scale(1) translate(-50%, -125%);
+            transform: scale(1) translate(-50%, -125%);
+            opacity: 0
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=perspective] {
+            -webkit-transform-origin: top;
+            transform-origin: top
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(10px) rotateX(0);
+            transform: translateY(10px) rotateX(0)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0) rotateX(-90deg);
+            transform: translateY(0) rotateX(-90deg)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0);
+            transform: translateY(0)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateY(10px) scale(1);
+            transform: translateY(10px) scale(1)
+        }
+        
+        .tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateY(0) scale(0);
+            transform: translateY(0) scale(0)
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-backdrop {
+            border-radius: 50% 0 0 50%
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-roundarrow {
+            right: -16px;
+            -webkit-transform-origin: 33.33333333% 50%;
+            transform-origin: 33.33333333% 50%
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-roundarrow svg {
+            position: absolute;
+            left: 0;
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg)
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-arrow {
+            border-left: 7px solid #333;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            right: -7px;
+            margin: 3px 0;
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-backdrop {
+            -webkit-transform-origin: 100% 0;
+            transform-origin: 100% 0
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-backdrop[data-state=visible] {
+            -webkit-transform: scale(6) translate(40%, -50%);
+            transform: scale(6) translate(40%, -50%);
+            opacity: 1
+        }
+        
+        .tippy-popper[x-placement^=left] .tippy-backdrop[data-state=hidden] {
+            -webkit-transform: scale(1.5) translate(40%, -50%);
+            transform: scale(1.5) translate(40%, -50%);
+            opacity: 0
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(-20px);
+            transform: translateX(-20px)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=perspective] {
+            -webkit-transform-origin: right;
+            transform-origin: right
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=perspective][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(-10px) rotateY(0);
+            transform: translateX(-10px) rotateY(0)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=perspective][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0) rotateY(-90deg);
+            transform: translateX(0) rotateY(-90deg)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=fade][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=fade][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0);
+            transform: translateX(0)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=scale][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(-10px) scale(1);
+            transform: translateX(-10px) scale(1)
+        }
+        
+        .tippy-popper[x-placement^=left] [data-animation=scale][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0) scale(0);
+            transform: translateX(0) scale(0)
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-backdrop {
+            border-radius: 0 50% 50% 0
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-roundarrow {
+            left: -16px;
+            -webkit-transform-origin: 66.66666666% 50%;
+            transform-origin: 66.66666666% 50%
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-roundarrow svg {
+            position: absolute;
+            left: 0;
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg)
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-arrow {
+            border-right: 7px solid #333;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            left: -7px;
+            margin: 3px 0;
+            -webkit-transform-origin: 100% 50%;
+            transform-origin: 100% 50%
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-backdrop {
+            -webkit-transform-origin: -100% 0;
+            transform-origin: -100% 0
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-backdrop[data-state=visible] {
+            -webkit-transform: scale(6) translate(-140%, -50%);
+            transform: scale(6) translate(-140%, -50%);
+            opacity: 1
+        }
+        
+        .tippy-popper[x-placement^=right] .tippy-backdrop[data-state=hidden] {
+            -webkit-transform: scale(1.5) translate(-140%, -50%);
+            transform: scale(1.5) translate(-140%, -50%);
+            opacity: 0
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(20px);
+            transform: translateX(20px)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=perspective] {
+            -webkit-transform-origin: left;
+            transform-origin: left
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=perspective][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(10px) rotateY(0);
+            transform: translateX(10px) rotateY(0)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=perspective][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0) rotateY(90deg);
+            transform: translateX(0) rotateY(90deg)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=fade][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=fade][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0);
+            transform: translateX(0)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=scale][data-state=visible] {
+            opacity: 1;
+            -webkit-transform: translateX(10px) scale(1);
+            transform: translateX(10px) scale(1)
+        }
+        
+        .tippy-popper[x-placement^=right] [data-animation=scale][data-state=hidden] {
+            opacity: 0;
+            -webkit-transform: translateX(0) scale(0);
+            transform: translateX(0) scale(0)
+        }
+        
+        .tippy-tooltip {
+            position: relative;
+            color: #fff;
+            border-radius: 4px;
+            font-size: .9rem;
+            padding: .3rem .6rem;
+            text-align: center;
+            will-change: transform;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #333
+        }
+        
+        .tippy-tooltip[data-size=small] {
+            padding: .2rem .4rem;
+            font-size: .75rem
+        }
+        
+        .tippy-tooltip[data-size=large] {
+            padding: .4rem .8rem;
+            font-size: 1rem
+        }
+        
+        .tippy-tooltip[data-animatefill] {
+            overflow: hidden;
+            background-color: transparent
+        }
+        
+        .tippy-tooltip[data-animatefill] .tippy-content {
+            transition: -webkit-clip-path cubic-bezier(.46, .1, .52, .98);
+            transition: clip-path cubic-bezier(.46, .1, .52, .98);
+            transition: clip-path cubic-bezier(.46, .1, .52, .98), -webkit-clip-path cubic-bezier(.46, .1, .52, .98)
+        }
+        
+        .tippy-tooltip[data-interactive],
+        .tippy-tooltip[data-interactive] path {
+            pointer-events: auto
+        }
+        
+        .tippy-tooltip[data-inertia][data-state=visible] {
+            transition-timing-function: cubic-bezier(.53, 2, .36, .85)
+        }
+        
+        .tippy-tooltip[data-inertia][data-state=hidden] {
+            transition-timing-function: ease
+        }
+        
+        .tippy-arrow,
+        .tippy-roundarrow {
+            position: absolute;
+            width: 0;
+            height: 0
+        }
+        
+        .tippy-roundarrow {
+            width: 24px;
+            height: 8px;
+            fill: #333;
+            pointer-events: none
+        }
+        
+        .tippy-backdrop {
+            position: absolute;
+            will-change: transform;
+            background-color: #333;
+            border-radius: 50%;
+            width: 26%;
+            left: 50%;
+            top: 50%;
+            z-index: -1;
+            transition: all cubic-bezier(.46, .1, .52, .98);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden
+        }
+        
+        .tippy-backdrop:after {
+            content: "";
+            float: left;
+            padding-top: 100%
+        }
+        
+        body:not(.tippy-touch) .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
+            -webkit-clip-path: ellipse(100% 100% at 50% 50%);
+            clip-path: ellipse(100% 100% at 50% 50%)
+        }
+        
+        body:not(.tippy-touch) .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
+            -webkit-clip-path: ellipse(5% 50% at 50% 50%);
+            clip-path: ellipse(5% 50% at 50% 50%)
+        }
+        
+        body:not(.tippy-touch) .tippy-popper[x-placement=right] .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
+            -webkit-clip-path: ellipse(135% 100% at 0 50%);
+            clip-path: ellipse(135% 100% at 0 50%)
+        }
+        
+        body:not(.tippy-touch) .tippy-popper[x-placement=right] .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
+            -webkit-clip-path: ellipse(40% 100% at 0 50%);
+            clip-path: ellipse(40% 100% at 0 50%)
+        }
+        
+        body:not(.tippy-touch) .tippy-popper[x-placement=left] .tippy-tooltip[data-animatefill][data-state=visible] .tippy-content {
+            -webkit-clip-path: ellipse(135% 100% at 100% 50%);
+            clip-path: ellipse(135% 100% at 100% 50%)
+        }
+        
+        body:not(.tippy-touch) .tippy-popper[x-placement=left] .tippy-tooltip[data-animatefill][data-state=hidden] .tippy-content {
+            -webkit-clip-path: ellipse(40% 100% at 100% 50%);
+            clip-path: ellipse(40% 100% at 100% 50%)
+        }
+        
+        @media (max-width:360px) {
+            .tippy-popper {
+                max-width: 96%;
+                max-width: calc(100% - 20px)
+            }
+        }
     </style>
-    <style type="text/css">
-      .loading-wave-dots[data-v-46b20d22] {
-        position: relative
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: inline-block;
-        margin-top: -4px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        -webkit-animation: loading-wave-dots-data-v-46b20d22 linear 2.8s infinite;
-        animation: loading-wave-dots-data-v-46b20d22 linear 2.8s infinite
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item:first-child {
-        margin-left: -36px
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(2) {
-        margin-left: -20px;
-        -webkit-animation-delay: .14s;
-        animation-delay: .14s
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(3) {
-        margin-left: -4px;
-        -webkit-animation-delay: .28s;
-        animation-delay: .28s
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(4) {
-        margin-left: 12px;
-        -webkit-animation-delay: .42s;
-        animation-delay: .42s
-      }
-
-      .loading-wave-dots[data-v-46b20d22] .wave-item:last-child {
-        margin-left: 28px;
-        -webkit-animation-delay: .56s;
-        animation-delay: .56s
-      }
-
-      @-webkit-keyframes loading-wave-dots-data-v-46b20d22 {
-        0% {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-
-        10% {
-          -webkit-transform: translateY(-6px);
-          transform: translateY(-6px);
-          background: #999
-        }
-
-        20% {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-
-        to {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-      }
-
-      @keyframes loading-wave-dots-data-v-46b20d22 {
-        0% {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-
-        10% {
-          -webkit-transform: translateY(-6px);
-          transform: translateY(-6px);
-          background: #999
-        }
-
-        20% {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-
-        to {
-          -webkit-transform: translateY(0);
-          transform: translateY(0);
-          background: #bbb
-        }
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item {
-        width: 5px;
-        height: 5px;
-        -webkit-animation: loading-circles-data-v-46b20d22 linear .75s infinite;
-        animation: loading-circles-data-v-46b20d22 linear .75s infinite
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:first-child {
-        margin-top: -14.5px;
-        margin-left: -2.5px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(2) {
-        margin-top: -11.26px;
-        margin-left: 6.26px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(3) {
-        margin-top: -2.5px;
-        margin-left: 9.5px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(4) {
-        margin-top: 6.26px;
-        margin-left: 6.26px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(5) {
-        margin-top: 9.5px;
-        margin-left: -2.5px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(6) {
-        margin-top: 6.26px;
-        margin-left: -11.26px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(7) {
-        margin-top: -2.5px;
-        margin-left: -14.5px
-      }
-
-      .loading-circles[data-v-46b20d22] .circle-item:last-child {
-        margin-top: -11.26px;
-        margin-left: -11.26px
-      }
-
-      @-webkit-keyframes loading-circles-data-v-46b20d22 {
-        0% {
-          background: #dfdfdf
-        }
-
-        90% {
-          background: #505050
-        }
-
-        to {
-          background: #dfdfdf
-        }
-      }
-
-      @keyframes loading-circles-data-v-46b20d22 {
-        0% {
-          background: #dfdfdf
-        }
-
-        90% {
-          background: #505050
-        }
-
-        to {
-          background: #dfdfdf
-        }
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item {
-        background: #666;
-        -webkit-animation: loading-bubbles-data-v-46b20d22 linear .75s infinite;
-        animation: loading-bubbles-data-v-46b20d22 linear .75s infinite
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:first-child {
-        margin-top: -12.5px;
-        margin-left: -.5px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2) {
-        margin-top: -9.26px;
-        margin-left: 8.26px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3) {
-        margin-top: -.5px;
-        margin-left: 11.5px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4) {
-        margin-top: 8.26px;
-        margin-left: 8.26px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5) {
-        margin-top: 11.5px;
-        margin-left: -.5px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6) {
-        margin-top: 8.26px;
-        margin-left: -9.26px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7) {
-        margin-top: -.5px;
-        margin-left: -12.5px
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:last-child {
-        margin-top: -9.26px;
-        margin-left: -9.26px
-      }
-
-      @-webkit-keyframes loading-bubbles-data-v-46b20d22 {
-        0% {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 3px #666
-        }
-
-        90% {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 0 #666
-        }
-
-        to {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 3px #666
-        }
-      }
-
-      @keyframes loading-bubbles-data-v-46b20d22 {
-        0% {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 3px #666
-        }
-
-        90% {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 0 #666
-        }
-
-        to {
-          width: 1px;
-          height: 1px;
-          box-shadow: 0 0 0 3px #666
-        }
-      }
-
-      .loading-default[data-v-46b20d22] {
-        position: relative;
-        border: 1px solid #999;
-        -webkit-animation: loading-rotating-data-v-46b20d22 ease 1.5s infinite;
-        animation: loading-rotating-data-v-46b20d22 ease 1.5s infinite
-      }
-
-      .loading-default[data-v-46b20d22]:before {
-        content: "";
-        position: absolute;
-        display: block;
-        top: 0;
-        left: 50%;
-        margin-top: -3px;
-        margin-left: -3px;
-        width: 6px;
-        height: 6px;
-        background-color: #999;
-        border-radius: 50%
-      }
-
-      .loading-spiral[data-v-46b20d22] {
-        border: 2px solid #777;
-        border-right-color: transparent;
-        -webkit-animation: loading-rotating-data-v-46b20d22 linear .85s infinite;
-        animation: loading-rotating-data-v-46b20d22 linear .85s infinite
-      }
-
-      @-webkit-keyframes loading-rotating-data-v-46b20d22 {
-        0% {
-          -webkit-transform: rotate(0);
-          transform: rotate(0)
-        }
-
-        to {
-          -webkit-transform: rotate(1turn);
-          transform: rotate(1turn)
-        }
-      }
-
-      @keyframes loading-rotating-data-v-46b20d22 {
-        0% {
-          -webkit-transform: rotate(0);
-          transform: rotate(0)
-        }
-
-        to {
-          -webkit-transform: rotate(1turn);
-          transform: rotate(1turn)
-        }
-      }
-
-      .loading-bubbles[data-v-46b20d22],
-      .loading-circles[data-v-46b20d22] {
-        position: relative
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item,
-      .loading-circles[data-v-46b20d22] .circle-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: inline-block;
-        border-radius: 50%
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(2) {
-        -webkit-animation-delay: 93ms;
-        animation-delay: 93ms
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(3) {
-        -webkit-animation-delay: .186s;
-        animation-delay: .186s
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(4) {
-        -webkit-animation-delay: .279s;
-        animation-delay: .279s
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(5) {
-        -webkit-animation-delay: .372s;
-        animation-delay: .372s
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(6) {
-        -webkit-animation-delay: .465s;
-        animation-delay: .465s
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7),
-      .loading-circles[data-v-46b20d22] .circle-item:nth-child(7) {
-        -webkit-animation-delay: .558s;
-        animation-delay: .558s
-      }
-
-      .loading-bubbles[data-v-46b20d22] .bubble-item:last-child,
-      .loading-circles[data-v-46b20d22] .circle-item:last-child {
-        -webkit-animation-delay: .651s;
-        animation-delay: .651s
-      }
-    </style>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-2b5deba9.00efda3d.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-2b5deba9.4acadad8.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-0726cf8d.27f7b0ef.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-0726cf8d.ef2ac9c0.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-569c03cd.bef60821.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-569c03cd.7da68977.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-1eabedfe.a9bc7529.js"></script>
-    <script charset="utf-8" src="./成绩项详情_files/chunk-1fe4a436.f3132777.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-1514fbc4.abe99e57.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-1514fbc4.88af66df.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-3d8c1359.386477ac.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-3d8c1359.8e4263db.js"></script>
-    <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-7f36017d.b098af91.css">
-    <script charset="utf-8" src="./成绩项详情_files/chunk-7f36017d.644d5978.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://bdfz.seiue.com/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://bdfz.seiue.com/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://bdfz.seiue.com/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://bdfz.seiue.com/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://bdfz.seiue.com/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://bdfz.seiue.com/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://bdfz.seiue.com/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://bdfz.seiue.com/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://bdfz.seiue.com/favicons/favicon-16x16.png">
+    <link rel="manifest" href="https://bdfz.seiue.com/favicons/manifest.json">
+    <link rel="preconnect" href="https://platform.seiue.com/">
+    <link rel="preconnect" href="https://chalkng.seiue.com/">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <metaname="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <title>成绩项详情</title>
+        <style>
+            .seiue-loader-container {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        </style>
+        <link href="https://bdfz.seiue.com/css/chunk-003005e6.ba617297.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0086d4e9.5d2eae20.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-02460656.7574b947.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-047eb03c.e40269d6.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-053b570c.c2195692.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-05f2d8ee.6d0a2b7d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0639d25f.2ca05f11.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-071bb57b.d4048357.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-0726cf8d.27f7b0ef.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0a15eaeb.1aa036dd.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0b1b6e1c.d2f3a341.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0c1d79ac.72e48249.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0c6de9c3.a68ed7ab.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-0ee2bf1a.7dfd8f38.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-12bfb56e.f3209633.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1418cbec.492d64c9.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1455951a.3f007bbd.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-149b0946.86203d06.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-1514fbc4.abe99e57.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1516b31e.7d49c9b7.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-15206da1.f3567427.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-153bcd2e.5a983f08.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1789d0be.55b71bf5.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-179bf918.9ede8fd3.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-186daeef.b1ff3bcf.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-188d8590.651c9b85.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1a591014.f04264b7.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1b9a339c.f48a804e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1cb3e6f3.0a79c225.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1cc1dbcb.f8425bf6.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1cdb90ff.457e711e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1cf93308.747fa8a4.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-1ee6eff0.5450cffa.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-20e39a80.3984bb13.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-21cb0ed6.57a951ba.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-21f31271.0233fb27.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-22f01b1b.a2568949.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-2395e43c.99c6fce3.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-257f0a81.f0bb1589.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-258b6f3a.1a00daa5.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-25f6f2ca.f2443cf4.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-2786ab98.fb419c33.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-2b5deba9.00efda3d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-2cf52d53.e3fa512f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3055c205.808e93f4.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-30618d74.77366234.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-306f3760.7c70d2bb.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3239632f.81997de9.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-32a3470e.9ef7d41d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-332f8568.88977dea.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3377a338.cd907dd9.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3429d3f0.dea06dcf.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-34dd22fe.98564573.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3693abbd.b184ca0c.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-36cba76a.6f9bf6f2.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-36d6eb60.f6ec2f43.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3776cd5e.808084b1.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-38498d94.ea716ed6.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3b665230.6a1f1517.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3b683bfe.3986be7f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3c91c0ee.fd9879bd.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-3d8c1359.386477ac.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-3ecc6367.7d98b182.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3f8bf1b9.40afbdf8.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-3fe36f9b.57a951ba.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-40c5525c.7a9907d0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-40d49a40.ebae6b35.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-411381ea.0b5bd23d.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-412b9b55.b3753599.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-435b0b0e.6de3b05e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-453dfa45.0b5e44b2.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-459d2de4.8973aa69.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-4c401eba.fdc86833.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4c649117.2b80b355.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4d140e44.66f07403.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4d42fae2.fa9f7054.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4dcc3346.79f0d828.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4dcd5ce2.113cfd38.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-4e68fcb2.a989628a.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5037eea8.eae8883e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-511fc762.6f7f1a83.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-51f1a2e7.86b56508.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-529f19f4.c2d10eb7.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-52db6f30.b0c82610.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5643da07.027dfe8d.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-569c03cd.bef60821.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5762ddad.15a6b172.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5a3645b0.514e7f8a.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5bfe26c2.22b1d549.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5cb5f3cc.4e3ea3bd.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5da5d0f0.25cb40c5.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-5e75aa75.9381d6c2.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-61770712.af5e3336.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-666a08ba.6dec44a0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-671dac60.505e651c.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6771274f.65ab970d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6848fa66.e74e34ff.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6ae51ed0.3be9cbb0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6ce66f2d.34e01cb0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6cf55c0c.d2a3698d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6d51a490.04ac3875.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-6ddf19e4.0b78ce68.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-74195e51.77950f66.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-74f0e96c.42454b12.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-7541b87e.23922363.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-77f09d5c.8973aa69.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-782b1869.2a997a86.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-78e30fec.027dfe8d.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-7f36017d.b098af91.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-808e024e.171134da.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-84ba384a.7f8d561c.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-86847a6e.f4289ad9.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-8725b64a.b794826f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-88e77166.a8dd2d47.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-8eefff4e.81997de9.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-9152bf34.f3567427.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-92836434.4426e591.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-92ed7d14.1cc8962f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-97c36cac.87e49f73.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-99a7a3d4.8bb2702e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-9cd9a6d8.f03b115b.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-a1893304.2e8bf406.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-a40a6da8.599918e1.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-a5c210a2.88a79b4c.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-a60fb6be.4acee9b0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-a7e1d94c.088ee993.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-aa3e38fa.e110d9b7.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-b5c8cd4a.e085ce98.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-b9a3d684.a16e9f67.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-baabb80a.027dfe8d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-bd259976.a490db2e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-bd8f5fd6.a0c0b1d0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-bdf9775c.d91cd65d.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-be534e52.72fd977f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-bf68164e.8afb4f9e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-c940b554.864f1ede.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-c95beb5c.3b2ff6c3.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-ca0fe92a.4aaaee32.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-cabe2b8c.ef71f1f0.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-cafc47f6.34af4a17.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-cfab5e68.835ef79a.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-d275a6da.ee165127.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-d397e248.605ccaa7.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-da03fbce.baea190f.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-db150faa.492c855b.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-dd0b01b4.85ccaca4.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-e1cece66.e2b1934e.css" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-e6d38cfe.d3765326.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-e70e9c48.31f29905.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-eec0217e.d29c5e88.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-efc40508.dc23376e.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-f596feb2.b6386210.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-f6710c06.5b887f8b.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-f6a326c8.75a20450.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-f9c0868e.a9b8ab90.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-fa282234.cc8bafc0.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-fb54a110.c284026c.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/css/chunk-fbb89460.bed562f7.css" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-003005e6.60292431.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0086d4e9.17362789.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-02460656.fbcc2775.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-047eb03c.b27b1139.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-053b570c.2068cc3c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-05f2d8ee.08a4b09a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0639d25f.ceb9cb78.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-071bb57b.fa4c0e9d.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-0726cf8d.ef2ac9c0.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0a15eaeb.8c9fa054.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0b1b6e1c.f441500a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0c1d79ac.097f4cda.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0c6de9c3.e8496c9f.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-0ee2bf1a.8467da93.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-11491882.edfaf7a1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-12bfb56e.a0e8fd50.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1418cbec.b64b62ed.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1455951a.b8d951b3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-149b0946.5dc30fce.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-1514fbc4.88af66df.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1516b31e.4ef41ed0.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-15206da1.af95aa57.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-153bcd2e.cc20dffa.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1789d0be.7ef309f4.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-179bf918.5f836a84.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-186daeef.bc5f174e.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-188d8590.23fb1ea7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1a591014.d3463345.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1b9a339c.325a095d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1cb3e6f3.278f1307.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1cc1dbcb.3adf6e80.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1cdb90ff.c1a76cb8.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1cf93308.599f3b7a.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-1eabedfe.a9bc7529.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-1ee6eff0.1809b623.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-1fe4a436.f3132777.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-20e39a80.7ccca44a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-21cb0ed6.1e544db3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-21f31271.1f516108.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-22f01b1b.8be8e845.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2395e43c.01cd34aa.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-257f0a81.89a0efe6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-258b6f3a.8bbafb28.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-25f6f2ca.8ba60b34.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2786ab98.7236ac7d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-29a224ea.9d4ce9eb.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-2b5deba9.4acadad8.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2cf52d53.aa799d7c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0a404d.5827f6ae.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0ab715.e809f7c8.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0b33ff.47cdc80a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0bfeb1.8416d8c0.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0c55ca.b05a08f7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0c8656.0ac7d06c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0cc806.e1c49617.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0cc9b6.006f2785.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0d0285.5d144e53.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d0d09d4.1446b974.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d208e84.7303bbf3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d20fe6e.258e7da2.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-2d2176a7.028f045b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d22230e.ec215f98.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d22231b.660165e3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-2d230acf.799f35c2.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3055c205.bcba0cec.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-30618d74.ade8717a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-306f3760.24e1bd21.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3239632f.f878fb33.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-32a3470e.fb81aeef.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-332f8568.ae1d92c1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3377a338.040c01f1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3429d3f0.63266121.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-34dd22fe.ca412067.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3693abbd.abad0330.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-36cba76a.e768ea80.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-36d6eb60.57b085d1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3776cd5e.95c81b73.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-38498d94.f869c955.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3aa81b7a.6857f366.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3b665230.62ac8f1e.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3b683bfe.b8560b7b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3c91c0ee.58902eb1.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-3d8c1359.8e4263db.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-3ecc6367.7f2c8484.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3f8bf1b9.bd88d0da.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-3fe36f9b.1cb62a3b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-40c5525c.0a6fd577.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-40d49a40.836a3e87.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-411381ea.621f8e2c.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-412b9b55.ed731cd6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-435b0b0e.97bd44a7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-453dfa45.61f53ff7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-459d2de4.3d0169fa.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-463b0fac.e2b39791.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-4c401eba.fa510528.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4c649117.7617687c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4d140e44.ae3270c7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4d42fae2.8e279610.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4dcc3346.b4614d74.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4dcd5ce2.1af0b167.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-4e68fcb2.32e2709c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5037eea8.498666d4.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-511fc762.66e1d132.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-51f1a2e7.28f485a5.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-529f19f4.d24213f1.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-52db6f30.8b863c1b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5643da07.1782ba0c.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-569c03cd.7da68977.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5762ddad.b4b31d50.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-59157aad.ac346f2a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5a3645b0.a2c608c1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5bfe26c2.5b9cd0a1.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5cb5f3cc.e08d90f3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5da5d0f0.b30b446f.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-5e75aa75.c6a81710.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-5feec84e.96faea24.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-60432ef8.d7a0848b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-61770712.a6e59a9d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-666a08ba.fd69a45d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-66982ea6.23817e43.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-671dac60.d380db0e.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6771274f.1eff4e3d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6848fa66.c55e8b34.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6ae51ed0.f51d8f1d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6ce66f2d.5c4e3459.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6cf55c0c.392823e7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6d51a490.88433da7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-6ddf19e4.46276428.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-70f1a602.35991c93.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-74195e51.600601e3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-74f0e96c.592c36e4.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-7541b87e.0f5c81ec.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-77496ec0.221a070e.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-77f09d5c.4c8b6387.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-78074934.e16bab55.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-782b1869.39756743.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-78e30fec.6ca2faf7.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-7f36017d.644d5978.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-808e024e.9847fd82.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-84ba384a.5dc08bb7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-86847a6e.5ae44ed8.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-8725b64a.fdb6d274.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-88e77166.b45adce7.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-8eefff4e.bd46113e.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-9152bf34.370fa8a3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-92836434.a0de1b0c.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-92ed7d14.4f82133a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-97c36cac.069c253c.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-99a7a3d4.761ba4f8.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-9cd9a6d8.14a76466.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-a1893304.64ff41a3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-a40a6da8.f8b6a3bf.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-a5c210a2.c266f53f.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-a60fb6be.3aa10cc3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-a7e1d94c.40e46cb2.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-aa3e38fa.2a90d050.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-b5c8cd4a.0b574bca.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-b9a3d684.41ce004b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-baabb80a.f6bc58f6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-bd259976.31e69d3d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-bd8f5fd6.e2135577.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-bdf9775c.fc6b760d.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-be534e52.baf9f0c0.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-bf68164e.88b463ea.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-c940b554.f112c168.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-c95beb5c.67856524.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-ca0fe92a.e2822ec3.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-cabe2b8c.2a6f400a.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-cafc47f6.5d3c018f.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-cfab5e68.1c81b1fb.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-d275a6da.82e30cf2.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-d397e248.7dd253f6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-da03fbce.777b9dd4.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-db150faa.abc19d5a.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-dd0b01b4.ad031e00.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-e1cece66.4cd81049.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-e6d38cfe.e9d80d12.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-e70e9c48.7c211eb6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-eec0217e.3605ef05.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-efc40508.b568d9d2.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-efe59a24.81d141bb.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-f596feb2.9ca10a99.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-f64a2c0a.10d3545b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-f6710c06.11eb6d51.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-f6a326c8.8c4ee58b.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-f9c0868e.61e7ae03.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-fa282234.33c2e4fa.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-fb54a110.e862d1f6.js" rel="prefetch">
+        <link href="https://bdfz.seiue.com/js/chunk-fbb89460.75e80b97.js" rel="prefetch">
+        <link href="./成绩项详情_files/chunk-common.51b66c34.css" rel="preload" as="style">
+        <link href="./成绩项详情_files/chunk-vendors.da2e68e8.css" rel="preload" as="style">
+        <link href="./成绩项详情_files/mobile.970ca800.css" rel="preload" as="style">
+        <link href="./成绩项详情_files/chunk-common.b82cd3fd.js" rel="preload" as="script">
+        <!-- <link href="./成绩项详情_files/chunk-vendors.6978b5df.js" rel="preload" as="script"> -->
+        <link href="./成绩项详情_files/mobile.1a152cdb.js" rel="preload" as="script">
+        <link href="./成绩项详情_files/chunk-vendors.da2e68e8.css" rel="stylesheet">
+        <link href="./成绩项详情_files/chunk-common.51b66c34.css" rel="stylesheet">
+        <link href="./成绩项详情_files/mobile.970ca800.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-e6d38cfe.d3765326.css">
+        <script type="text/javascript" async="" src="./成绩项详情_files/vds.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-e6d38cfe.e9d80d12.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-59157aad.ac346f2a.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-3ecc6367.7d98b182.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-3ecc6367.7f2c8484.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-463b0fac.e2b39791.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-cafc47f6.34af4a17.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-cafc47f6.5d3c018f.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-412b9b55.b3753599.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-412b9b55.ed731cd6.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-52db6f30.b0c82610.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-52db6f30.8b863c1b.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-2d2176a7.028f045b.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-5feec84e.96faea24.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-99a7a3d4.8bb2702e.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-99a7a3d4.761ba4f8.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-047eb03c.e40269d6.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-047eb03c.b27b1139.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-4c401eba.fdc86833.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-4c401eba.fa510528.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-cfab5e68.835ef79a.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-cfab5e68.1c81b1fb.js"></script>
+        <style type="text/css">
+            .infinite-loading-container[data-v-46b21138] {
+                clear: both;
+                text-align: center
+            }
+            
+            .infinite-loading-container[data-v-46b21138] [class^=loading-] {
+                display: inline-block;
+                margin: 5px 0;
+                width: 28px;
+                height: 28px;
+                font-size: 28px;
+                line-height: 28px;
+                border-radius: 50%
+            }
+            
+            .btn-try-infinite[data-v-46b21138] {
+                margin-top: 5px;
+                padding: 5px 10px;
+                color: #999;
+                font-size: 14px;
+                line-height: 1;
+                background: transparent;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                outline: none;
+                cursor: pointer
+            }
+            
+            .btn-try-infinite[data-v-46b21138]:not(:active):hover {
+                opacity: .8
+            }
+        </style>
+        <style type="text/css">
+            .loading-wave-dots[data-v-46b20d22] {
+                position: relative
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                display: inline-block;
+                margin-top: -4px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                -webkit-animation: loading-wave-dots-data-v-46b20d22 linear 2.8s infinite;
+                animation: loading-wave-dots-data-v-46b20d22 linear 2.8s infinite
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item:first-child {
+                margin-left: -36px
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(2) {
+                margin-left: -20px;
+                -webkit-animation-delay: .14s;
+                animation-delay: .14s
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(3) {
+                margin-left: -4px;
+                -webkit-animation-delay: .28s;
+                animation-delay: .28s
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(4) {
+                margin-left: 12px;
+                -webkit-animation-delay: .42s;
+                animation-delay: .42s
+            }
+            
+            .loading-wave-dots[data-v-46b20d22] .wave-item:last-child {
+                margin-left: 28px;
+                -webkit-animation-delay: .56s;
+                animation-delay: .56s
+            }
+            
+            @-webkit-keyframes loading-wave-dots-data-v-46b20d22 {
+                0% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+                10% {
+                    -webkit-transform: translateY(-6px);
+                    transform: translateY(-6px);
+                    background: #999
+                }
+                20% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+                to {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+            }
+            
+            @keyframes loading-wave-dots-data-v-46b20d22 {
+                0% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+                10% {
+                    -webkit-transform: translateY(-6px);
+                    transform: translateY(-6px);
+                    background: #999
+                }
+                20% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+                to {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                    background: #bbb
+                }
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item {
+                width: 5px;
+                height: 5px;
+                -webkit-animation: loading-circles-data-v-46b20d22 linear .75s infinite;
+                animation: loading-circles-data-v-46b20d22 linear .75s infinite
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:first-child {
+                margin-top: -14.5px;
+                margin-left: -2.5px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(2) {
+                margin-top: -11.26px;
+                margin-left: 6.26px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(3) {
+                margin-top: -2.5px;
+                margin-left: 9.5px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(4) {
+                margin-top: 6.26px;
+                margin-left: 6.26px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(5) {
+                margin-top: 9.5px;
+                margin-left: -2.5px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(6) {
+                margin-top: 6.26px;
+                margin-left: -11.26px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(7) {
+                margin-top: -2.5px;
+                margin-left: -14.5px
+            }
+            
+            .loading-circles[data-v-46b20d22] .circle-item:last-child {
+                margin-top: -11.26px;
+                margin-left: -11.26px
+            }
+            
+            @-webkit-keyframes loading-circles-data-v-46b20d22 {
+                0% {
+                    background: #dfdfdf
+                }
+                90% {
+                    background: #505050
+                }
+                to {
+                    background: #dfdfdf
+                }
+            }
+            
+            @keyframes loading-circles-data-v-46b20d22 {
+                0% {
+                    background: #dfdfdf
+                }
+                90% {
+                    background: #505050
+                }
+                to {
+                    background: #dfdfdf
+                }
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item {
+                background: #666;
+                -webkit-animation: loading-bubbles-data-v-46b20d22 linear .75s infinite;
+                animation: loading-bubbles-data-v-46b20d22 linear .75s infinite
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:first-child {
+                margin-top: -12.5px;
+                margin-left: -.5px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2) {
+                margin-top: -9.26px;
+                margin-left: 8.26px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3) {
+                margin-top: -.5px;
+                margin-left: 11.5px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4) {
+                margin-top: 8.26px;
+                margin-left: 8.26px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5) {
+                margin-top: 11.5px;
+                margin-left: -.5px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6) {
+                margin-top: 8.26px;
+                margin-left: -9.26px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7) {
+                margin-top: -.5px;
+                margin-left: -12.5px
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:last-child {
+                margin-top: -9.26px;
+                margin-left: -9.26px
+            }
+            
+            @-webkit-keyframes loading-bubbles-data-v-46b20d22 {
+                0% {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 3px #666
+                }
+                90% {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 0 #666
+                }
+                to {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 3px #666
+                }
+            }
+            
+            @keyframes loading-bubbles-data-v-46b20d22 {
+                0% {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 3px #666
+                }
+                90% {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 0 #666
+                }
+                to {
+                    width: 1px;
+                    height: 1px;
+                    box-shadow: 0 0 0 3px #666
+                }
+            }
+            
+            .loading-default[data-v-46b20d22] {
+                position: relative;
+                border: 1px solid #999;
+                -webkit-animation: loading-rotating-data-v-46b20d22 ease 1.5s infinite;
+                animation: loading-rotating-data-v-46b20d22 ease 1.5s infinite
+            }
+            
+            .loading-default[data-v-46b20d22]:before {
+                content: "";
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 50%;
+                margin-top: -3px;
+                margin-left: -3px;
+                width: 6px;
+                height: 6px;
+                background-color: #999;
+                border-radius: 50%
+            }
+            
+            .loading-spiral[data-v-46b20d22] {
+                border: 2px solid #777;
+                border-right-color: transparent;
+                -webkit-animation: loading-rotating-data-v-46b20d22 linear .85s infinite;
+                animation: loading-rotating-data-v-46b20d22 linear .85s infinite
+            }
+            
+            @-webkit-keyframes loading-rotating-data-v-46b20d22 {
+                0% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0)
+                }
+                to {
+                    -webkit-transform: rotate(1turn);
+                    transform: rotate(1turn)
+                }
+            }
+            
+            @keyframes loading-rotating-data-v-46b20d22 {
+                0% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0)
+                }
+                to {
+                    -webkit-transform: rotate(1turn);
+                    transform: rotate(1turn)
+                }
+            }
+            
+            .loading-bubbles[data-v-46b20d22],
+            .loading-circles[data-v-46b20d22] {
+                position: relative
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item,
+            .loading-circles[data-v-46b20d22] .circle-item {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                display: inline-block;
+                border-radius: 50%
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(2) {
+                -webkit-animation-delay: 93ms;
+                animation-delay: 93ms
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(3) {
+                -webkit-animation-delay: .186s;
+                animation-delay: .186s
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(4) {
+                -webkit-animation-delay: .279s;
+                animation-delay: .279s
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(5) {
+                -webkit-animation-delay: .372s;
+                animation-delay: .372s
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(6) {
+                -webkit-animation-delay: .465s;
+                animation-delay: .465s
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7),
+            .loading-circles[data-v-46b20d22] .circle-item:nth-child(7) {
+                -webkit-animation-delay: .558s;
+                animation-delay: .558s
+            }
+            
+            .loading-bubbles[data-v-46b20d22] .bubble-item:last-child,
+            .loading-circles[data-v-46b20d22] .circle-item:last-child {
+                -webkit-animation-delay: .651s;
+                animation-delay: .651s
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-2b5deba9.00efda3d.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-2b5deba9.4acadad8.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-0726cf8d.27f7b0ef.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-0726cf8d.ef2ac9c0.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-569c03cd.bef60821.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-569c03cd.7da68977.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-1eabedfe.a9bc7529.js"></script>
+        <script charset="utf-8" src="./成绩项详情_files/chunk-1fe4a436.f3132777.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-1514fbc4.abe99e57.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-1514fbc4.88af66df.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-3d8c1359.386477ac.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-3d8c1359.8e4263db.js"></script>
+        <link rel="stylesheet" type="text/css" href="./成绩项详情_files/chunk-7f36017d.b098af91.css">
+        <script charset="utf-8" src="./成绩项详情_files/chunk-7f36017d.644d5978.js"></script>
 </head>
 
 <body class="mobile"><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
@@ -6158,353 +6142,320 @@
       </path>
     </symbol>
   </svg>
-  <div data-v-0d9767db="" class="mobile-app">
-    <div data-v-b8be91d2="" data-v-0d9767db="" class="loader-container" style="display: none;">
-      <div data-v-b8be91d2="" class="loader"><svg data-v-b8be91d2="" viewBox="25 25 50 50" class="circular">
+    <div data-v-0d9767db="" class="mobile-app">
+        <div data-v-b8be91d2="" data-v-0d9767db="" class="loader-container" style="display: none;">
+            <div data-v-b8be91d2="" class="loader"><svg data-v-b8be91d2="" viewBox="25 25 50 50" class="circular">
           <circle data-v-b8be91d2="" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"
             class="path"></circle>
         </svg></div>
-    </div>
-    <div data-v-0d9767db="" class="container flex column">
-      <!---->
-      <div data-v-167749d6="" data-v-0d9767db="">
-        <header data-v-4aa04f50="" data-v-167749d6="" class="header-container">
-          <div data-v-4aa04f50="" class="header-wrap cbox flex justify full-x fixed">
-            <div data-v-4aa04f50="" class="header-left flex left">
-              <!---->
-              <div data-v-4aa04f50="" class="back flex left"><b data-v-4aa04f50=""
-                  class="icon icon-angle-left font-20"></b></div>
-              <!---->
-            </div>
-            <div data-v-4aa04f50="" class="header-center flex center"><a data-v-4aa04f50=""
-                href="https://bdfz.seiue.com/student/classes/2211773/grades_/items/689029"
-                class="flex center column router-link-exact-active router-link-active">
-                <div data-v-4aa04f50="" id="testname1" class="big-title"></div>
-                <div data-v-4aa04f50="" class="small-title"></div>
-              </a>
-              <!---->
-            </div>
-            <div data-v-4aa04f50="" class="header-right flex right">
-              <div data-v-167749d6="" data-v-4aa04f50="" class="icon-wrap"><b data-v-167749d6="" data-v-4aa04f50=""
-                  class="icon icon-menu font-20">
-                </b></div>
-            </div>
-          </div>
-        </header>
-        <!---->
-        <div data-v-33f59052="" data-v-167749d6="">
-          <div data-v-1f4cffeb="" data-v-33f59052="" class="assessment-intro card">
-            <div data-v-1f4cffeb="" class="card__title"><strong data-v-1f4cffeb="">评价项介绍</strong></div>
-            <div data-v-1f4cffeb="" class="card-block">
-              <div data-v-1f4cffeb="" class="assessment-intro__list">
-                <div data-v-1f4cffeb="" class="assessment-intro__list-item"><strong
-                    data-v-1f4cffeb="">计分方式:</strong><span data-v-1f4cffeb="">分数记分</span></div>
-                <div data-v-1f4cffeb="" class="assessment-intro__list-item limit" style="display: none;">
-                  <p data-v-1f4cffeb="" class="rtf"><strong data-v-1f4cffeb="">说明:</strong><span
-                      data-v-1f4cffeb=""></span></p>
-                </div>
-              </div>
-            </div>
-            <!---->
-          </div>
-          <div data-v-662e75ae="" data-v-33f59052="" class="grade-header card">
-            <div data-v-662e75ae="" id="testname2" class="card__title"></div>
-            <div data-v-662e75ae="" class="card-block">
-              <ul data-v-662e75ae="" class="grade-desc flex">
-                <li data-v-662e75ae="" class="grade-desc__item">
-                  <div data-v-662e75ae="" class="grade-desc__item-score">
-                    <div data-v-662e75ae="" class="i-block"><span id="myscore" data-v-662e75ae=""></span><span
-                        data-v-662e75ae="" id="tot" class="total"></span></div>
-                  </div>
-                  <div data-v-662e75ae="" id="conv" class="grade-desc__item-tips"></div>
-                  <!---->
-                </li>
-                <li data-v-662e75ae="" class="grade-desc__item">
-                  <div data-v-662e75ae="" class="grade-desc__item-score"><span id="rank"
-                      data-v-662e75ae=""></span><span data-v-662e75ae="" id="totrank" class="total"></span></div>
-                  <div data-v-662e75ae="" class="grade-desc__item-tips">排名/总人数</div>
-                </li>
-              </ul>
-              <table data-v-f639a97c="" data-v-662e75ae="" class="neighbor">
-                <tbody data-v-f639a97c="">
-                  <tr data-v-f639a97c="" class="sequence">
-                    <td data-v-f639a97c="" class="first">
-                      <div data-v-f639a97c="" class="dot ab-center"></div>
-                      <div data-v-f639a97c="" class="line ab-center flex">
-                        <div data-v-f639a97c="" class="half-line not-line"></div>
-                        <div data-v-f639a97c="" class="half-line"></div>
-                      </div>
-                      <ul data-v-f639a97c="" class="dot-ellipsis ab-right">
-                        <li data-v-f639a97c=""></li>
-                        <li data-v-f639a97c=""></li>
-                        <li data-v-f639a97c=""></li>
-                      </ul>
-                    </td>
-                    <td data-v-f639a97c="" class="previous">
-                      <div data-v-f639a97c="" class="dot ab-center"></div>
-                      <div data-v-f639a97c="" class="line ab-center flex">
-                        <div data-v-f639a97c="" class="half-line"></div>
-                        <div data-v-f639a97c="" class="half-line"></div>
-                      </div>
-                    </td>
-                    <td data-v-f639a97c="" class="owner">
-                      <div data-v-f639a97c="" class="dot ab-center"></div>
-                      <div data-v-f639a97c="" class="line ab-center flex">
-                        <div data-v-f639a97c="" class="half-line"></div>
-                        <div data-v-f639a97c="" class="half-line"></div>
-                      </div>
-                    </td>
-                    <td data-v-f639a97c="" class="next">
-                      <div data-v-f639a97c="" class="dot ab-center"></div>
-                      <div data-v-f639a97c="" class="line ab-center flex">
-                        <div data-v-f639a97c="" class="half-line"></div>
-                        <div data-v-f639a97c="" class="half-line not-line"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr data-v-f639a97c="" class="rank">
-                    <td data-v-f639a97c="" class="first"><span data-v-f639a97c="">第一名</span></td>
-                    <td data-v-f639a97c="" class="previous"><span data-v-f639a97c="">前一名</span></td>
-                    <td data-v-f639a97c="" class="owner"><span data-v-f639a97c="">我</span></td>
-                    <td data-v-f639a97c="" class="next"><span data-v-f639a97c="">后一名</span></td>
-                  </tr>
-                  <tr data-v-f639a97c="" class="score">
-                    <td data-v-f639a97c="" id="first" class="first"><span data-v-f639a97c=""></span></td>
-                    <td data-v-f639a97c="" id="prev" class="previous"><span data-v-f639a97c=""></span></td>
-                    <td data-v-f639a97c="" id="owner" class="owner"><span data-v-f639a97c=""></span></td>
-                    <td data-v-f639a97c="" id="nxt" class="next"><span data-v-f639a97c=""></span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!---->
-          <!---->
-          <!---->
-          <div data-v-e067b1ae="" data-v-33f59052="" class="card">
-            <div data-v-e067b1ae="" class="card__title">成绩分布图</div>
-            <div data-v-e067b1ae="" class="card-block distribute-chart">
-              <div data-v-e067b1ae="" class="echarts" _echarts_instance_="ec_1576204647552"
-                style="width: 100%; height: 200px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
-                <div
-                  style="position: relative; overflow: hidden; width: 1194px; height: 600px; padding: 0px; margin: 0px; border-width: 0px;">
-                  <canvas id="canvas" data-zr-dom-id="zr_0" width="1194" height="600"
-                    style="position: absolute; left: 0px; top: 0px; width: 398px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
-                </div>
-                <div></div>
-              </div>
-            </div>
-            <div data-v-e067b1ae="" class="card-footer">
-              <ul data-v-e067b1ae="" class="grade-desc flex">
-                <li data-v-e067b1ae="" class="grade-desc__item"><span data-v-e067b1ae=""
-                    class="grade-desc__item-title">班级平均分</span><span data-v-e067b1ae="" id="avr"
-                    class="grade-desc__item-score"></span></li>
-                <li data-v-e067b1ae="" class="grade-desc__item"><span data-v-e067b1ae=""
-                    class="grade-desc__item-title">标准差</span><span data-v-e067b1ae="" id="std"
-                    class="grade-desc__item-score"></span></li>
-              </ul>
-            </div>
-          </div>
-          <div data-v-7911ec28="" data-v-33f59052="" class="feedback card">
-            <div data-v-7911ec28="" class="card__title flex justify">
-              <div data-v-7911ec28="" class="feedback__title"><strong data-v-7911ec28="">主动反馈</strong>
-                <!---->
-              </div>
-              <!---->
-            </div>
-            <div data-v-7911ec28="" class="card-block">
-              <!---->
-              <div data-v-7911ec28="" class="feedback-unfold">
-                <div data-v-7911ec28="" class="feedback-unfold__question"><strong data-v-7911ec28="">我这次发挥的怎么样？</strong>
-                </div>
-                <div data-v-7911ec28="" class="feedback-unfold__mark-score">
-                  <div data-v-67f79174="" data-v-7911ec28="" class="feedback-unfold__mark-score">
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                  </div>
-                </div>
-                <div data-v-7911ec28="" class="feedback-unfold__mark-label">
-                  <!---->
-                  <!---->
-                  <!---->
-                  <!---->
-                  <!----><label data-v-7911ec28="" class="label label-default"
-                    style="margin: 0px 8px 8px 0px;">需要更努力</label><label data-v-7911ec28="" class="label label-default"
-                    style="margin: 0px 8px 8px 0px;">我没有天赋</label><label data-v-7911ec28="" class="label label-default"
-                    style="margin: 0px 8px 8px 0px;">题目太难了</label><label data-v-7911ec28="" class="label label-default"
-                    style="margin: 0px 8px 8px 0px;">运气不太好</label><label data-v-7911ec28="" class="label label-default"
-                    style="margin: 0px 8px 8px 0px;">最近状态不佳</label></div>
-                <div data-v-7911ec28="" class="feedback-unfold__answer"><textarea data-v-7911ec28="" rows="4"
-                    maxlength="112" placeholder="跟老师吐槽"></textarea></div>
-                <div data-v-7911ec28="" class="feedback-unfold__question"><strong
-                    data-v-7911ec28="">我对下一次有多大信心？</strong></div>
-                <div data-v-7911ec28="" class="feedback-unfold__mark-score">
-                  <div data-v-67f79174="" data-v-7911ec28="" class="feedback-unfold__mark-score">
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                    <div data-v-67f79174="" class="expression deadpan"
-                      style="cursor: pointer; width: 38px; height: 32px;"></div>
-                  </div>
-                </div>
-              </div>
-              <!---->
-            </div>
-            <div data-v-7911ec28="" class="feedback-vitta flex">
-              <!----><button data-v-7911ec28="" class="btn btn-important block">提交反馈</button>
-              <!---->
-            </div>
-          </div>
-          <div data-v-71e7ec1e="" data-v-33f59052="" class="change-log">
-            <div data-v-71e7ec1e="" class="change-log__card cbox">
-              <div data-v-71e7ec1e="" class="change-log__header">
-                <div data-v-71e7ec1e="" class="change-log__title">修改历史</div>
-              </div>
-              <div data-v-71e7ec1e="" class="change-log__body">
-                <ul data-v-71e7ec1e="">
-                  <li data-v-71e7ec1e="" class="change-log__item">
-                    <div data-v-71e7ec1e="" class="change-log__circle-wrap"><span data-v-71e7ec1e=""
-                        class="change-log__circle change-log__current-circle"></span></div>
-                    <div data-v-71e7ec1e="" class="change-log__info">
-                      <div data-v-71e7ec1e="" class="change-log__scores">
-                        <span data-v-71e7ec1e="" id="tot2"></span>
-                        <img data-v-71e7ec1e="" src="./成绩项详情_files/combined-shape.e894f02f.svg"
-                          class="change-log__combined-shape">
-                        <span data-v-71e7ec1e="" id="mt" class="change-log__current-score"></span>
-                      </div>
-                      <!----><small data-v-71e7ec1e="" id="date" class="change-log__time"></small>
-                    </div>
-                  </li>
-                  <!---->
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div data-v-6bade414="" data-v-0d9767db=""></div>
+        <div data-v-0d9767db="" class="container flex column">
+            <!---->
+            <div data-v-167749d6="" data-v-0d9767db="">
+                <header data-v-4aa04f50="" data-v-167749d6="" class="header-container">
+                    <div data-v-4aa04f50="" class="header-wrap cbox flex justify full-x fixed">
+                        <div data-v-4aa04f50="" class="header-left flex left">
+                            <!---->
+                            <div data-v-4aa04f50="" class="back flex left"><b data-v-4aa04f50="" class="icon icon-angle-left font-20"></b></div>
+                            <!---->
+                        </div>
+                        <div data-v-4aa04f50="" class="header-center flex center">
+                            <a data-v-4aa04f50="" href="https://bdfz.seiue.com/student/classes/2211773/grades_/items/689029" class="flex center column router-link-exact-active router-link-active">
+                                <div data-v-4aa04f50="" id="testname1" class="big-title"></div>
+                                <div data-v-4aa04f50="" class="small-title"></div>
+                            </a>
+                            <!---->
+                        </div>
+                        <div data-v-4aa04f50="" class="header-right flex right">
+                            <div data-v-167749d6="" data-v-4aa04f50="" class="icon-wrap"><b data-v-167749d6="" data-v-4aa04f50="" class="icon icon-menu font-20">
+                </b></div>
+                        </div>
+                    </div>
+                </header>
+                <!---->
+                <div data-v-33f59052="" data-v-167749d6="">
+                    <div data-v-1f4cffeb="" data-v-33f59052="" class="assessment-intro card">
+                        <div data-v-1f4cffeb="" class="card__title"><strong data-v-1f4cffeb="">评价项介绍</strong></div>
+                        <div data-v-1f4cffeb="" class="card-block">
+                            <div data-v-1f4cffeb="" class="assessment-intro__list">
+                                <div data-v-1f4cffeb="" class="assessment-intro__list-item"><strong data-v-1f4cffeb="">计分方式:</strong><span data-v-1f4cffeb="">分数记分</span></div>
+                                <div data-v-1f4cffeb="" class="assessment-intro__list-item limit" style="display: none;">
+                                    <p data-v-1f4cffeb="" class="rtf"><strong data-v-1f4cffeb="">说明:</strong><span data-v-1f4cffeb=""></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                    </div>
+                    <div data-v-662e75ae="" data-v-33f59052="" class="grade-header card">
+                        <div data-v-662e75ae="" id="testname2" class="card__title"></div>
+                        <div data-v-662e75ae="" class="card-block">
+                            <ul data-v-662e75ae="" class="grade-desc flex">
+                                <li data-v-662e75ae="" class="grade-desc__item">
+                                    <div data-v-662e75ae="" class="grade-desc__item-score">
+                                        <div data-v-662e75ae="" class="i-block"><span id="myscore" data-v-662e75ae=""></span><span data-v-662e75ae="" id="tot" class="total"></span></div>
+                                    </div>
+                                    <div data-v-662e75ae="" id="conv" class="grade-desc__item-tips"></div>
+                                    <!---->
+                                </li>
+                                <li data-v-662e75ae="" class="grade-desc__item">
+                                    <div data-v-662e75ae="" class="grade-desc__item-score"><span id="rank" data-v-662e75ae=""></span><span data-v-662e75ae="" id="totrank" class="total"></span></div>
+                                    <div data-v-662e75ae="" class="grade-desc__item-tips">排名/总人数</div>
+                                </li>
+                            </ul>
+                            <table data-v-f639a97c="" data-v-662e75ae="" class="neighbor">
+                                <tbody data-v-f639a97c="">
+                                    <tr data-v-f639a97c="" class="sequence">
+                                        <td data-v-f639a97c="" class="first">
+                                            <div data-v-f639a97c="" class="dot ab-center"></div>
+                                            <div data-v-f639a97c="" class="line ab-center flex">
+                                                <div data-v-f639a97c="" class="half-line not-line"></div>
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                            </div>
+                                            <ul data-v-f639a97c="" class="dot-ellipsis ab-right">
+                                                <li data-v-f639a97c=""></li>
+                                                <li data-v-f639a97c=""></li>
+                                                <li data-v-f639a97c=""></li>
+                                            </ul>
+                                        </td>
+                                        <td data-v-f639a97c="" class="previous">
+                                            <div data-v-f639a97c="" class="dot ab-center"></div>
+                                            <div data-v-f639a97c="" class="line ab-center flex">
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                            </div>
+                                        </td>
+                                        <td data-v-f639a97c="" class="owner">
+                                            <div data-v-f639a97c="" class="dot ab-center"></div>
+                                            <div data-v-f639a97c="" class="line ab-center flex">
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                            </div>
+                                        </td>
+                                        <td data-v-f639a97c="" class="next">
+                                            <div data-v-f639a97c="" class="dot ab-center"></div>
+                                            <div data-v-f639a97c="" class="line ab-center flex">
+                                                <div data-v-f639a97c="" class="half-line"></div>
+                                                <div data-v-f639a97c="" class="half-line not-line"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-v-f639a97c="" class="rank">
+                                        <td data-v-f639a97c="" class="first"><span data-v-f639a97c="">第一名</span></td>
+                                        <td data-v-f639a97c="" class="previous"><span data-v-f639a97c="">前一名</span></td>
+                                        <td data-v-f639a97c="" class="owner"><span data-v-f639a97c="">我</span></td>
+                                        <td data-v-f639a97c="" class="next"><span data-v-f639a97c="">后一名</span></td>
+                                    </tr>
+                                    <tr data-v-f639a97c="" class="score">
+                                        <td data-v-f639a97c="" id="first" class="first"><span data-v-f639a97c=""></span></td>
+                                        <td data-v-f639a97c="" id="prev" class="previous"><span data-v-f639a97c=""></span></td>
+                                        <td data-v-f639a97c="" id="owner" class="owner"><span data-v-f639a97c=""></span></td>
+                                        <td data-v-f639a97c="" id="nxt" class="next"><span data-v-f639a97c=""></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!---->
+                    <!---->
+                    <!---->
+                    <div data-v-e067b1ae="" data-v-33f59052="" class="card">
+                        <div data-v-e067b1ae="" class="card__title">成绩分布图</div>
+                        <div data-v-e067b1ae="" class="card-block distribute-chart">
+                            <div data-v-e067b1ae="" class="echarts" _echarts_instance_="ec_1576204647552" style="width: 100%; height: 200px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+                                <div style="position: relative; overflow: hidden; width: 1194px; height: 600px; padding: 0px; margin: 0px; border-width: 0px;">
+                                    <canvas id="canvas" data-zr-dom-id="zr_0" width="1194" height="600" style="position: absolute; left: 0px; top: 0px; width: 398px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div data-v-e067b1ae="" class="card-footer">
+                            <ul data-v-e067b1ae="" class="grade-desc flex">
+                                <li data-v-e067b1ae="" class="grade-desc__item"><span data-v-e067b1ae="" class="grade-desc__item-title">班级平均分</span><span data-v-e067b1ae="" id="avr" class="grade-desc__item-score"></span></li>
+                                <li data-v-e067b1ae="" class="grade-desc__item"><span data-v-e067b1ae="" class="grade-desc__item-title">标准差</span><span data-v-e067b1ae="" id="std" class="grade-desc__item-score"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div data-v-7911ec28="" data-v-33f59052="" class="feedback card">
+                        <div data-v-7911ec28="" class="card__title flex justify">
+                            <div data-v-7911ec28="" class="feedback__title"><strong data-v-7911ec28="">主动反馈</strong>
+                                <!---->
+                            </div>
+                            <!---->
+                        </div>
+                        <div data-v-7911ec28="" class="card-block">
+                            <!---->
+                            <div data-v-7911ec28="" class="feedback-unfold">
+                                <div data-v-7911ec28="" class="feedback-unfold__question"><strong data-v-7911ec28="">我这次发挥的怎么样？</strong>
+                                </div>
+                                <div data-v-7911ec28="" class="feedback-unfold__mark-score">
+                                    <div data-v-67f79174="" data-v-7911ec28="" class="feedback-unfold__mark-score">
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                    </div>
+                                </div>
+                                <div data-v-7911ec28="" class="feedback-unfold__mark-label">
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <!----><label data-v-7911ec28="" class="label label-default" style="margin: 0px 8px 8px 0px;">需要更努力</label><label data-v-7911ec28="" class="label label-default" style="margin: 0px 8px 8px 0px;">我没有天赋</label><label data-v-7911ec28=""
+                                        class="label label-default" style="margin: 0px 8px 8px 0px;">题目太难了</label><label data-v-7911ec28="" class="label label-default" style="margin: 0px 8px 8px 0px;">运气不太好</label><label data-v-7911ec28="" class="label label-default"
+                                        style="margin: 0px 8px 8px 0px;">最近状态不佳</label></div>
+                                <div data-v-7911ec28="" class="feedback-unfold__answer"><textarea data-v-7911ec28="" rows="4" maxlength="112" placeholder="跟老师吐槽"></textarea></div>
+                                <div data-v-7911ec28="" class="feedback-unfold__question"><strong data-v-7911ec28="">我对下一次有多大信心？</strong></div>
+                                <div data-v-7911ec28="" class="feedback-unfold__mark-score">
+                                    <div data-v-67f79174="" data-v-7911ec28="" class="feedback-unfold__mark-score">
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                        <div data-v-67f79174="" class="expression deadpan" style="cursor: pointer; width: 38px; height: 32px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                        <div data-v-7911ec28="" class="feedback-vitta flex">
+                            <!----><button data-v-7911ec28="" class="btn btn-important block">提交反馈</button>
+                            <!---->
+                        </div>
+                    </div>
+                    <div data-v-71e7ec1e="" data-v-33f59052="" class="change-log">
+                        <div data-v-71e7ec1e="" class="change-log__card cbox">
+                            <div data-v-71e7ec1e="" class="change-log__header">
+                                <div data-v-71e7ec1e="" class="change-log__title">修改历史</div>
+                            </div>
+                            <div data-v-71e7ec1e="" class="change-log__body">
+                                <ul data-v-71e7ec1e="">
+                                    <li data-v-71e7ec1e="" class="change-log__item">
+                                        <div data-v-71e7ec1e="" class="change-log__circle-wrap"><span data-v-71e7ec1e="" class="change-log__circle change-log__current-circle"></span></div>
+                                        <div data-v-71e7ec1e="" class="change-log__info">
+                                            <div data-v-71e7ec1e="" class="change-log__scores">
+                                                <span data-v-71e7ec1e="" id="tot2"></span>
+                                                <img data-v-71e7ec1e="" src="./成绩项详情_files/combined-shape.e894f02f.svg" class="change-log__combined-shape">
+                                                <span data-v-71e7ec1e="" id="mt" class="change-log__current-score"></span>
+                                            </div>
+                                            <!----><small data-v-71e7ec1e="" id="date" class="change-log__time"></small>
+                                        </div>
+                                    </li>
+                                    <!---->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-v-6bade414="" data-v-0d9767db=""></div>
+        </div>
     </div>
-  </div>
-  <script src="./成绩项详情_files/chunk-vendors.6978b5df.js "></script>
-  <script src="./成绩项详情_files/chunk-common.b82cd3fd.js "></script>
-  <script src="./成绩项详情_files/mobile.1a152cdb.js "></script><iframe src="./成绩项详情_files/hooks.html"
-    style="visibility: hidden; position: absolute; left: -9999px; top: -9999px;"></iframe>
-  <div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
-    <div class="xl-chrome-ext-bar__logo"></div>
+    <!-- <script src="./成绩项详情_files/chunk-vendors.6978b5df.js "></script> -->
+    <script src="./成绩项详情_files/chunk-common.b82cd3fd.js "></script>
+    <script src="./成绩项详情_files/mobile.1a152cdb.js "></script><iframe src="./成绩项详情_files/hooks.html" style="visibility: hidden; position: absolute; left: -9999px; top: -9999px;"></iframe>
+    <div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
+        <div class="xl-chrome-ext-bar__logo"></div>
 
-    <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
-    <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
-  </div>
-  <div data-v-67d7b16a="" data-v-6bade414="" class="se-popup se-component-desktop">
-    <!---->
-    <!---->
-  </div>
-  <div data-v-0e8033c7="" data-v-167749d6="" class="m-popup">
-    <!---->
-    <!---->
-  </div>
-  <script>
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var cw=1110;
-    canvas.style.width=document.body.clientWidth+"px";
-    var testname = $.query.get("testname");
-    var myscore = $.query.get("myscore");
-    var tot = $.query.get("tot");
-    var conv = $.query.get("conv");
-    var rank = $.query.get("rank");
-    var totrank = $.query.get("totrank");
-    var first = $.query.get("first");
-    var prev = $.query.get("prev");
-    var nxt = $.query.get("nxt");
-    var avr = $.query.get("avr");
-    var std = $.query.get("std");
-    var date = $.query.get("date");
-    var d1 = $.query.get("d1");
-    var d2 = $.query.get("d2");
-    var d3 = $.query.get("d3");
-    var d4 = $.query.get("d4");
-    var d5 = $.query.get("d5");
-    var dy = $.query.get("dy");
-    var vnum = $.query.get("vnum");
-    document.getElementById("testname1").innerHTML = testname;
-    document.getElementById("testname2").innerHTML = testname;
-    document.getElementById("myscore").innerHTML = myscore;
-    document.getElementById("owner").innerHTML = myscore;
-    document.getElementById("tot").innerHTML = "/" + tot;
-    document.getElementById("tot2").innerHTML = "/" + tot;
-    document.getElementById("mt").innerHTML = myscore + "/" + tot;
-    document.getElementById("conv").innerHTML = "折算总分" + conv + "分";
-    document.getElementById("rank").innerHTML = rank;
-    document.getElementById("totrank").innerHTML = "/" + totrank;
-    document.getElementById("first").innerHTML = first;
-    document.getElementById("prev").innerHTML = prev;
-    document.getElementById("nxt").innerHTML = nxt;
-    document.getElementById("avr").innerHTML = avr;
-    document.getElementById("std").innerHTML = std;
-    document.getElementById("date").innerHTML = date;
-    ctx.fillStyle = "#999999";
-    ctx.font = "normal bold 41px 微软雅黑";
-    ctx.fillText("人数", 16, 48);
-    //ctx.fillRect(0,75,100,1);
-    //ctx.fillRect(0,528,100,2);
-    ctx.strokeStyle = "rgba(153,153,153,0.3)";
-    ctx.font = "35px 微软雅黑";
-    var tc = 0;
-    var ex = 35;
-    var dely = (505 - 75) / vnum;
-    ctx.lineWidth = 2;
-    for (var i = vnum; i >= 0; i--) {
-      if (tc < 10) ex = 52;
-      else ex = 32;
-      ctx.fillText(tc, ex, 100 + i * dely);
-      tc += dy;
-      ctx.beginPath();
-      ctx.moveTo(100, 90 + i * dely);
-      ctx.lineTo(cw, 90 + i * dely);
-      console.log(cw);
-      ctx.stroke();
-    }
+        <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
+        <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
+    </div>
+    <div data-v-67d7b16a="" data-v-6bade414="" class="se-popup se-component-desktop">
+        <!---->
+        <!---->
+    </div>
+    <div data-v-0e8033c7="" data-v-167749d6="" class="m-popup">
+        <!---->
+        <!---->
+    </div>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var cw = 1110;
+        canvas.style.width = document.body.clientWidth + "px";
+        var testname = $.query.get("testname");
+        var myscore = $.query.get("myscore");
+        var tot = $.query.get("tot");
+        var conv = $.query.get("conv");
+        var rank = $.query.get("rank");
+        var totrank = $.query.get("totrank");
+        var first = $.query.get("first");
+        var prev = $.query.get("prev");
+        var nxt = $.query.get("nxt");
+        var avr = $.query.get("avr");
+        var std = $.query.get("std");
+        var date = $.query.get("date");
+        var d1 = $.query.get("d1");
+        var d2 = $.query.get("d2");
+        var d3 = $.query.get("d3");
+        var d4 = $.query.get("d4");
+        var d5 = $.query.get("d5");
+        var dy = $.query.get("dy");
+        var vnum = $.query.get("vnum");
+        document.getElementById("testname1").innerHTML = testname;
+        document.getElementById("testname2").innerHTML = testname;
+        document.getElementById("myscore").innerHTML = myscore;
+        document.getElementById("owner").innerHTML = myscore;
+        document.getElementById("tot").innerHTML = "/" + tot;
+        document.getElementById("tot2").innerHTML = "/" + tot;
+        document.getElementById("mt").innerHTML = myscore + "/" + tot;
+        document.getElementById("conv").innerHTML = "折算总分" + conv + "分";
+        document.getElementById("rank").innerHTML = rank;
+        document.getElementById("totrank").innerHTML = "/" + totrank;
+        document.getElementById("first").innerHTML = first;
+        document.getElementById("prev").innerHTML = prev;
+        document.getElementById("nxt").innerHTML = nxt;
+        document.getElementById("avr").innerHTML = avr;
+        document.getElementById("std").innerHTML = std;
+        document.getElementById("date").innerHTML = date;
+        ctx.fillStyle = "#999999";
+        ctx.font = "normal bold 41px 微软雅黑";
+        ctx.fillText("人数", 16, 48);
+        //ctx.fillRect(0,75,100,1);
+        //ctx.fillRect(0,528,100,2);
+        ctx.strokeStyle = "rgba(153,153,153,0.3)";
+        ctx.font = "35px 微软雅黑";
+        var tc = 0;
+        var ex = 35;
+        var dely = (505 - 75) / vnum;
+        ctx.lineWidth = 2;
+        for (var i = vnum; i >= 0; i--) {
+            if (tc < 10) ex = 52;
+            else ex = 32;
+            ctx.fillText(tc, ex, 100 + i * dely);
+            tc += dy;
+            ctx.beginPath();
+            ctx.moveTo(100, 90 + i * dely);
+            ctx.lineTo(cw, 90 + i * dely);
+            console.log(cw);
+            ctx.stroke();
+        }
 
-    var s1 = "0-" + (tot / 5).toString();
-    var l1 = s1.length;
-    var s2 = (tot / 5).toString() + "-" + (2 * tot / 5).toString();
-    var l2 = s2.length;
-    var s3 = (2 * tot / 5).toString() + "-" + (3 * tot / 5).toString();
-    var l3 = s3.length;
-    var s4 = (3 * tot / 5).toString() + "-" + (4 * tot / 5).toString();
-    var l4 = s4.length;
-    var s5 = (4 * tot / 5).toString() + "-" + (tot).toString();
-    var l5 = s5.length;
+        var s1 = "0-" + (tot / 5).toString();
+        var l1 = s1.length;
+        var s2 = (tot / 5).toString() + "-" + (2 * tot / 5).toString();
+        var l2 = s2.length;
+        var s3 = (2 * tot / 5).toString() + "-" + (3 * tot / 5).toString();
+        var l3 = s3.length;
+        var s4 = (3 * tot / 5).toString() + "-" + (4 * tot / 5).toString();
+        var l4 = s4.length;
+        var s5 = (4 * tot / 5).toString() + "-" + (tot).toString();
+        var l5 = s5.length;
 
-    ctx.font = "36px 微软雅黑";
-    ctx.fillText(s1, 203 - (l1 * 20 / 2), 572);
-    ctx.fillText(s2, 406 - (l2 * 20 / 2), 572);
-    ctx.fillText(s3, 609 - (l3 * 20 / 2), 572);
-    ctx.fillText(s4, 812 - (l4 * 20 / 2), 572);
-    ctx.fillText(s5, 1015 - (l5 * 20 / 2), 572);
+        ctx.font = "36px 微软雅黑";
+        ctx.fillText(s1, 203 - (l1 * 20 / 2), 572);
+        ctx.fillText(s2, 406 - (l2 * 20 / 2), 572);
+        ctx.fillText(s3, 609 - (l3 * 20 / 2), 572);
+        ctx.fillText(s4, 812 - (l4 * 20 / 2), 572);
+        ctx.fillText(s5, 1015 - (l5 * 20 / 2), 572);
 
-    ctx.fillStyle = "#3e91f2";
-    ctx.fillRect(180, 520, 45, -(dely * d1) / dy);
-    ctx.fillRect(383, 520, 45, -(dely * d2) / dy);
-    ctx.fillRect(586, 520, 45, -(dely * d3) / dy);
-    ctx.fillRect(789, 520, 45, -(dely * d4) / dy);
-    ctx.fillRect(992, 520, 45, -(dely * d5) / dy);
-
-  </script>
+        ctx.fillStyle = "#3e91f2";
+        ctx.fillRect(180, 520, 45, -(dely * d1) / dy);
+        ctx.fillRect(383, 520, 45, -(dely * d2) / dy);
+        ctx.fillRect(586, 520, 45, -(dely * d3) / dy);
+        ctx.fillRect(789, 520, 45, -(dely * d4) / dy);
+        ctx.fillRect(992, 520, 45, -(dely * d5) / dy);
+    </script>
 </body>
 
 </html>
