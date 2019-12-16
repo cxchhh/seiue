@@ -44,10 +44,11 @@
             </form> -->
             <el-container>
                 <el-header id="header">
-                    Seiue simulator
+                    <span>希悦模拟器</span>
+                    <el-button type="primary" @click="onSubmit">立即生成</el-button>
                 </el-header>
                 <el-main id="main-area">
-                    <el-form :model="form" label-width="90px">
+                    <el-form :model="form" label-width="90px" style="background-color: white;">
                         <el-form-item label="名称">
                             <el-input v-model="form.testname" placeholder="该过评项名称是什么"></el-input>
                         </el-form-item>
@@ -79,7 +80,7 @@
                             <el-input-number v-model="form.vnum"></el-input-number>
                         </el-form-item>
                     </el-form>
-                    <el-form :model="form" id="form2" label-width="95px">
+                    <el-form :model="form" id="form2" label-width="95px" style="background-color: white;">
                         <el-form-item label="平均分">
                             <el-input-number v-model="form.avr"></el-input-number>
                         </el-form-item>
@@ -91,55 +92,77 @@
                             </el-date-picker>
                         </el-form-item>
                         <el-form-item label="第一级人数">
-                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d1" show-input></el-slider></div></template>
+                            <template>
+                                <div class="block">
+                                    <el-slider :max="form.totrank" v-model="form.d1" show-input></el-slider>
+                                </div>
+                            </template>
                         </el-form-item>
                         <el-form-item label="第二级人数">
-                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d2" show-input></el-slider></div></template>
+                            <template>
+                                <div class="block">
+                                    <el-slider :max="form.totrank" v-model="form.d2" show-input></el-slider>
+                                </div>
+                            </template>
                         </el-form-item>
                         <el-form-item label="第三级人数">
-                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d3" show-input></el-slider></div></template>
+                            <template>
+                                <div class="block">
+                                    <el-slider :max="form.totrank" v-model="form.d3" show-input></el-slider>
+                                </div>
+                            </template>
                         </el-form-item>
                         <el-form-item label="第四级人数">
-                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d4" show-input></el-slider></div></template>
+                            <template>
+                                <div class="block">
+                                    <el-slider :max="form.totrank" v-model="form.d4" show-input></el-slider>
+                                </div>
+                            </template>
                         </el-form-item>
                         <el-form-item label="第五级人数">
-                            <template><div class="block"><el-slider :max="form.totrank" v-model="form.d5" show-input></el-slider></div></template>
+                            <template>
+                                <div class="block">
+                                    <el-slider :max="form.totrank" v-model="form.d5" show-input></el-slider>
+                                </div>
+                            </template>
                         </el-form-item>
                         <el-form-item label="Y轴单位长度">
                             <template>
                                 <div class="block">
-                                    <el-slider change=""v-model="form.dy" show-input></el-slider>
+                                    <el-slider change="" v-model="form.dy" show-input></el-slider>
                                 </div>
                             </template>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="onSubmit">立即生成</el-button>
+                            <!-- <el-button type="primary" @click="onSubmit">立即生成</el-button> -->
                         </el-form-item>
                     </el-form>
                 </el-main>
                 <el-footer id="footer-bar">
-                    <el-row>
-                        <!-- <el-col :span="8">&nbsp;&nbsp;希悦模拟器</el-col> -->
-                        <el-col :offset="16" :span="8"><img src="https://img.shields.io/badge/github-steven12138-blue.svg"> <img src="https://img.shields.io/badge/github-cxchhh-blue.svg" alt=""></el-col>
-                    </el-row>
+                    <img src="https://img.shields.io/badge/github-steven12138-blue.svg">
+                    <img src="https://img.shields.io/badge/github-cxchhh-blue.svg" alt="">
                 </el-footer>
             </el-container>
         </div>
         <div v-else class="document">
             <div class="doc">
                 <h1 class="title">希悦模拟器免责声明</h1>
-                <p> <strong>1、</strong> 一切访问本网站呢并正常使用此网站功能的用户，均被视为已经仔细阅读本条款并表示完全同意。凡以任何方式使用本网站者，均被视为愿接受本网站相关声明和用户服务协议的约束。</p>
-                <p> <strong>2、</strong> 用户使用本网站发表的言论以及转载的内容不代表本网站的任何意见与观点</p>
-                <p> <strong>3、</strong> 此网站由用户转载的信息，皆有本网站的使用者提供。其真实性、准确性和合法性由信息发布人负责。本网站不做任何担保并不承担任何法律责任</p>
-                <p> <strong>4、</strong> 用户明确并同意使用本网站所提供的服务产生的误解以及风险由其本人承担；因本网站的服务所产生的一切后果也有其本人承担，本网站对此不承担任何责任</p>
-                <p><strong>5、</strong> 本声明为涉及的问题参见国家法律，当本声明与国家法律产生冲突时，以国家相关法律法规为准</p>
-                <p><strong>6、</strong>本声明的修改权、更新权和最终解释权均属本网站所有</p>
-            </div>
-            <div class="chkbox">
-                <template>
-                    <el-checkbox border size="medium" v-model="read_chked" class="chkbx">我已认真阅读并且同意上述免责声明</el-checkbox>
-                </template>
-                <el-button @click="ctn" class="cfbtn" type="primary">继续</el-button>
+                <ol class="para" style="padding-inline-start: 25px;">
+                    <li>一切访问本网站并正常使用此网站功能的用户，均被视为已经仔细阅读本条款并表示完全同意。凡以任何方式使用本网站者，均被视为愿接受本网站相关声明和用户服务协议的约束。</li>
+                    <li>用户使用本网站发表的言论以及转载的内容不代表本网站的任何意见与观点</li>
+                    <li>此网站由用户转载的信息，皆有本网站的使用者提供。其真实性、准确性和合法性由信息发布人负责。本网站不做任何担保并不承担任何法律责任</li>
+                    <li>用户明确并同意使用本网站所提供的服务产生的误解以及风险由其本人承担；因本网站的服务所产生的一切后果也有其本人承担，本网站对此不承担任何责任</li>
+                    <li>本声明为涉及的问题参见国家法律，当本声明与国家法律产生冲突时，以国家相关法律法规为准</li>
+                    <li>本声明的修改权、更新权和最终解释权均属本网站所有</li>
+                </ol>
+                <p style="text-align: center;margin-top: 2em;">
+                    <el-checkbox size="medium" v-model="read_chked" class="chkbx">我已认真阅读并且同意上述免责声明</el-checkbox>
+                </p>
+                <p style="text-align: center;">
+                    <el-button class="cfbtn" type="primary" @click="ctn">继续</el-button>
+                </p>
+                <!-- <div class="chkbox">
+                </div> -->
             </div>
         </div>
     </div>
@@ -179,13 +202,13 @@
             }
         },
         methods: {
-            setCookie: function(cname, cvalue, exdays) {    
-                var d = new Date();    
-                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));    
-                var expires = "expires=" + d.toUTCString();    
-                console.info(cname + "=" + cvalue + "; " + expires);    
-                document.cookie = cname + "=" + cvalue + "; " + expires;    
-                console.info(document.cookie);   
+            setCookie: function(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                console.info(cname + "=" + cvalue + "; " + expires);
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+                console.info(document.cookie);
             },
             ctn: function() {
                 if (!this.read_chked) {
@@ -218,29 +241,32 @@
                     return;
                 }
                 url = "score.html?testname=" + form.testname;
-                for (var key in form) {　　
+                for (var key in form) {
                     var item = form[key];
                     url += "&" + key + "=" + item;
                 }
                 localStorage.setItem("inputs", JSON.stringify(form));
                 window.location.href = url;
+            },
+            refreshCookie: function() {
+                this.setCookie("Agreement", false, 1)
             }
         },
     });
 
-    function getCookie(cname) {    
-        var name = cname + "=";    
-        var ca = document.cookie.split(';');    
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
         // console.log("获取cookie,现在循环");
-        for (var i = 0; i < ca.length; i++) {     
-            var c = ca[i];     
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
             // console.log(c);
-            while (c.charAt(0) == ' ') c = c.substring(1);     
-            if (c.indexOf(name) != -1) {      
-                return c.substring(name.length, c.length);     
-            }    
-        }    
-        return "";   
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
     }
 
     function Onload() {
