@@ -6,7 +6,7 @@
 }
 
 body {
-    min-width: 480px;
+    /* min-width: 480px; */
     margin: 0px;
     background: rgb(217, 228, 236);
 }
@@ -19,10 +19,10 @@ body {
 }
 
 #app {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     z-index: 2;
-    margin-right: 17px;
+    /* margin-right: 17px; */
 }
 
 .title {
@@ -102,6 +102,9 @@ body {
     position: sticky;
     top: 0;
     z-index: 1999;
+    height: 60px;
+    padding: 0 20px;
+    transition: width .25s, font-size .25s;
 }
 
 #main-area {
@@ -118,9 +121,26 @@ body {
 @media (max-width: 850px) {
     #main-area {
         flex-direction: column;
+        width: 80%;
     }
     #header{
+        font-size: 1.4em;
+    }
+
+}
+
+@media (max-width: 600px){
+    #header {
         width: 100vw;
+        font-size: 1.25em;
+    }
+
+    #clr-btn {
+        display: none;
+    }
+    #main-area {
+        flex-direction: column;
+    width: calc(100% - 20px);
     }
 }
 
@@ -139,6 +159,7 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     padding: 0px;
+    margin: 0;
 }
 
 .el-col {
@@ -149,7 +170,7 @@ body {
 .el-form {
     border: 1px solid #d7dae2;
     border-radius: 4px;
-    margin: 0px 20px;
+    margin: 0px 0px;
     padding: 10px;
 }
 
@@ -167,5 +188,6 @@ body {
     #form2 {
         width: 400px;
         margin-top: 0px;
+        margin-left: 20px;
     }
 }
