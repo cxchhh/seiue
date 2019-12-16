@@ -10,6 +10,9 @@ body {
     margin: 0px;
     background: rgb(217, 228, 236);
 }
+.main-content{
+    width: 100vw;
+}
 
 .para>li {
     line-height: 1.6em;
@@ -98,7 +101,7 @@ body {
     user-select: none;
     position: sticky;
     top: 0;
-    z-index: 10000000;
+    z-index: 1999;
 }
 
 #main-area {
@@ -115,6 +118,9 @@ body {
 @media (max-width: 850px) {
     #main-area {
         flex-direction: column;
+    }
+    #header{
+        width: 100vw;
     }
 }
 

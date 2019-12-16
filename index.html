@@ -6,6 +6,8 @@
     <meta charset="utf-8" />
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/jquery.params.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="./css/mainpage.css">
 </head>
@@ -45,7 +47,10 @@
             <el-container>
                 <el-header id="header">
                     <span>希悦模拟器</span>
-                    <el-button type="primary" @click="onSubmit">立即生成</el-button>
+                    <div>
+                        <el-button type="danger" @click="refreshCookie">清除缓存</el-button>
+                        <el-button type="primary" @click="onSubmit">立即生成</el-button>
+                    </div>
                 </el-header>
                 <el-main id="main-area">
                     <el-form :model="form" label-width="90px" style="background-color: white;">
@@ -156,7 +161,7 @@
                     <li>本声明的修改权、更新权和最终解释权均属本网站所有</li>
                 </ol>
                 <p style="text-align: center;margin-top: 2em;">
-                    <el-checkbox size="medium" v-model="read_chked" class="chkbx">我已认真阅读并且同意上述免责声明</el-checkbox>
+                    <el-checkbox border size="medium" v-model="read_chked" class="chkbx">我已认真阅读并且同意上述免责声明</el-checkbox>
                 </p>
                 <p style="text-align: center;">
                     <el-button class="cfbtn" type="primary" @click="ctn">继续</el-button>
@@ -218,11 +223,6 @@
                         duration: "1000"
                     })
                 } else {
-                    this.$message({
-                        type: "success",
-                        message: "感谢您使用此网站",
-                        duration: "1000"
-                    });
                     this.setCookie("Agreement", true, 1);
                     var self = this;
                     setTimeout(function() {
@@ -249,7 +249,23 @@
                 window.location.href = url;
             },
             refreshCookie: function() {
-                this.setCookie("Agreement", false, 1)
+                // this.setCookie("Agreement", false, 1)
+                if (confirm('确认清除所有缓存信息吗？当前存储的填写信息将永久丢失！')) {
+                    this.$message({
+                        type: "success",
+                        message: "清除完毕",
+                        duration: "1000"
+                    });
+                    this.clearAllCookie()
+                }
+            },
+            clearAllCookie: function() {
+                var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+                if (keys) {
+                    for (var i = keys.length; i--;)
+                        document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+                }
+                location.reload(true)
             }
         },
     });
